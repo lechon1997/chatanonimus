@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
-import Ranciada from '../components/ranciada'
+import Contenedor_login from '../components/contenedor_login'
 
 export default function Home() {
   return (
@@ -13,7 +13,7 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <Ranciada/>
+        <Contenedor_login/>
       </main>
 
       <footer className={styles.footer}>
