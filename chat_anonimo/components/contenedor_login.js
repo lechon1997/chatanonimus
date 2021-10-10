@@ -3,6 +3,7 @@ export default function Contenedor_login(){
     return (
         <div className="shadow border p-3 rounded h-50 w-75">
             <h2 className="mx-1 mb-4">Iniciar sesión</h2>
+        <form>
         <div className=" d-flex flex-column justify-content-center mb-2" >
             
             <div className="mx-1 mb-2 ">
@@ -17,6 +18,7 @@ export default function Contenedor_login(){
             </div>
             
         </div>
+        </form>
         <div className="mx-1 d-flex h-25 pb-2 flex-fill align-items-end bd-highlight ">
         <a className="link-primary me-auto bd-highlight">Registrarse</a>
         <a className="link-primary  bd-highlight">¿Olvidaste tu contraseña?</a>
