@@ -30,7 +30,7 @@ async function iniciarSesion(req,res){
         // fetch the posts
         let posts = await db
             .collection('usuarios')
-            .find({req.username})
+            .find({})
             
         // return the posts
         return res.json({
