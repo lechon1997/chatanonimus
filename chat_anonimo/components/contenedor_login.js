@@ -1,9 +1,27 @@
 export default function Contenedor_login(){
 
+    const registerUser = async event => {
+
+        event.preventDefault()
+    
+        const res = await fetch('/api/usuario', {
+          body: JSON.stringify({
+            name: event.target.name.value
+          }),
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          },
+          method: 'POST'
+        })
+    
+        const result = await res.json()
+        console.log(result)
+      }
+
     return (
         <div className="shadow border p-3 rounded h-50 w-75">
             <h2 className="mx-1 mb-4">Iniciar sesión</h2>
-        <form>
+        <form onSubmit={registerUser}>
         <div className=" d-flex flex-column justify-content-center mb-2" >
             
             <div className="mx-1 mb-2 ">
