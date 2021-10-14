@@ -49,7 +49,7 @@ export default function Contenedor_reg(){
             </div>
             <div className="d-flex">
             <div className="mx-1">
-            <input className="w-100 h-40px btn btn-primary" type="submit" value="Comfirmar"/>
+            <input className="w-100 h-40px btn btn-primary" type="submit" value="Confirmar"/>
             </div>
             <div className="mx-1">
             <input className="w-100 h-40px btn btn-secondary" type="submit" value="Volver"/>

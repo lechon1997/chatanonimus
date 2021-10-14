@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../../styles/Home.module.css'
-import Contenedor_reg from '../../components/contenedor_reg'
+import Crear_grupo from '../../components/contenedor_crear_grupo'
 
 export default function Home() {
 	return (
@@ -14,7 +14,7 @@ export default function Home() {
 
 			<div className={styles.container}>
 				<main className={styles.reg}>
-					<Contenedor_reg />
+					<Crear_grupo />
 				</main>
 			</div>
 			<footer className={styles.footer}>
