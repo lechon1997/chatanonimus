@@ -1,10 +1,12 @@
+
+
 export default function Contenedor_login(){
 
     const registerUser = async event => {
-
+        
         event.preventDefault()
-    
-        const res = await fetch('/api/usuario', {
+        console.log(event)
+        const res = await fetch('http://localhost:4000/usuario/', {
           body: JSON.stringify({
             name: event.target.name.value
           }),
@@ -19,10 +21,14 @@ export default function Contenedor_login(){
       }
 
     return (
-        <div className="shadow border p-3 rounded h-50 w-75">
-            <h2 className="mx-1 mb-4">Iniciar sesión</h2>
-        <form onSubmit={registerUser}>
-        <div className=" d-flex flex-column justify-content-center mb-2" >
+        <div className="shadow rounded altura-xd w-75 bg-white">
+          <div className=" d-flex ps-2 pb-1 pt-2 mb-3 bg-primary rounded-top ">
+            <h2 className="text-white me-auto " >Iniciar sesión</h2>
+            <i className="bi bi-chat text-white me-4 "></i>
+          </div>
+            
+        <form className="p-3 " onSubmit={registerUser}>
+        <div className=" d-flex flex-column justify-content-center  mb-2" >
             
             <div className="mx-1 mb-2 ">
                 <input  className="w-100 px-2 h-40px rounded border-secondary" name="username" type="text" placeholder="Usuario"/>
@@ -37,9 +43,9 @@ export default function Contenedor_login(){
             
         </div>
         </form>
-        <div className="mx-1 d-flex h-25 pb-2 flex-fill align-items-end bd-highlight ">
-        <a className="link-primary me-auto bd-highlight">Registrarse</a>
-        <a className="link-primary  bd-highlight">¿Olvidaste tu contraseña?</a>
+        <div className="mx-3 d-flex mt-2 pb-2">
+        <a className="link-primary me-auto ">Registrarse</a>
+        <a className="link-primary ">¿Olvidaste tu contraseña?</a>
         </div>
         </div>
     )

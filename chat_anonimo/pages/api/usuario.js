@@ -28,9 +28,10 @@ async function iniciarSesion(req,res){
         // connect to the database
         let { db } = await connectToDatabase();
         // fetch the posts
-        let posts = await db
-            .collection('usuarios')
-            .find({})
+        let posts = await db.collection('usuarios', function(err, collection) {
+            if (err) {
+                throw err;
+            }})
             
         // return the posts
         return res.json({

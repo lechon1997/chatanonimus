@@ -4,8 +4,14 @@
 
 .h-40px{
     height:40px;
-
 }
+
+.altura-xd{
+    height:300px;
+    min-height:300px;
+}
+
+
 
 
 input:focus{
@@ -18,7 +24,7 @@ input{
 }
 
 h2{
-    font-size: 20px;
+    font-size: 14px;
 }
 
 a{
@@ -30,3 +36,7 @@ a:hover{
     cursor: pointer;
 }
 
+body{
+    background:url(../public/images/alone.jpg) no-repeat center center fixed;
+    background-size: cover;
+}
