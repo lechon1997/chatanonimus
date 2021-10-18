@@ -1,5 +1,4 @@
-
-
+import Link from 'next/link'
 export default function Contenedor_login(){
 
     const registerUser = async event => {
@@ -43,9 +42,12 @@ export default function Contenedor_login(){
             
         </div>
         </form>
-        <div className="mx-3 d-flex mt-2 pb-2">
-        <a className="link-primary me-auto ">Registrarse</a>
-        <a className="link-primary ">¿Olvidaste tu contraseña?</a>
+        <div className="mx-1 d-flex h-25 pb-2 flex-fill align-items-end bd-highlight ">
+        <Link   href="http://localhost:3000/usuario/registrarse">
+                            <a className="link-primary me-auto bd-highlight">Registrarse
+        </a>
+                </Link>
+        <a className="link-primary  bd-highlight">¿Olvidaste tu contraseña?</a>
         </div>
         </div>
     )
