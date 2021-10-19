@@ -14,9 +14,10 @@ export async function crearGrupo(req, res){
     const descripcionGrupo = req.query["descripcionGrupo"];
     const fotoGrupo = req.query["fotoGrupo"];
 
+    const grupo = new Grupo({nombre: nombreGrupo, descripcion: descripcionGrupo, foto: fotoGrupo});
+    grupo.save();
     
-   
-    res.send({nombreGrupo, descripcionGrupo, fotoGrupo})
+    res.send({data: "xDDD"})
 }
 
 export async function actualizarGrupo(req, res){
