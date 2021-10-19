@@ -10,14 +10,13 @@ export async function getGrupo(req, res){
 }
 
 export async function crearGrupo(req, res){
-    const data = req.body
+    const nombreGrupo = req.query["nombreGrupo"];
+    const descripcionGrupo = req.query["descripcionGrupo"];
+    const fotoGrupo = req.query["fotoGrupo"];
 
-    res.send({data: data})
-    //console.log(req.params)
-    //console.log("mmm entré")
-    console.log(req.body)
-
-
+    
+   
+    res.send({nombreGrupo, descripcionGrupo, fotoGrupo})
 }
 
 export async function actualizarGrupo(req, res){

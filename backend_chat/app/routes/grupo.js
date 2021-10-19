@@ -5,7 +5,7 @@ const routerGrupo = Router()
 
 //routerGrupo.post('/',getGrupos)
 //routerGrupo.get('/:id',getGrupo)
-routerGrupo.post('/crearGrupo', crearGrupo)
+routerGrupo.get('/crearGrupo', crearGrupo)
 //routerGrupo.patch('/:id',actualizarGrupo)
 //routerGrupo.delete('/:id',eliminarGrupo)
 
