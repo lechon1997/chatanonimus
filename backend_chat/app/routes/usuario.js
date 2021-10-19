@@ -3,7 +3,7 @@ import { getUsuarios, getUsuario, crearUsuario, actualizarUsuario, autenticarUsu
 
 const routerUsuario = Router()
 
-routerUsuario.get('/',getUsuarios)
+routerUsuario.post('/',getUsuarios)
 routerUsuario.get('/:id',getUsuario)
 routerUsuario.post('/',crearUsuario)
 routerUsuario.patch('/:id',actualizarUsuario)

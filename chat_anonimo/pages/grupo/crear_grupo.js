@@ -13,7 +13,7 @@ export default function Home() {
 			</Head>
 
 			<div className={styles.container}>
-				<main className={styles.reg}>
+				<main className={styles.main}>
 					<Crear_grupo />
 				</main>
 			</div>
