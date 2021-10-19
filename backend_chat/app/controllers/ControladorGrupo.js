@@ -14,10 +14,14 @@ export async function crearGrupo(req, res){
     const descripcionGrupo = req.query["descripcionGrupo"];
     const fotoGrupo = req.query["fotoGrupo"];
 
-    const grupo = new Grupo({nombre: nombreGrupo, descripcion: descripcionGrupo, foto: fotoGrupo});
-    grupo.save();
-    
-    res.send({data: "xDDD"})
+    try{
+        const grupo = new Grupo({nombre: nombreGrupo, descripcion: descripcionGrupo, foto: fotoGrupo});
+        await grupo.save();
+        res.send({data: "Se ha creado el grupo correctamente"})
+    }catch(error){
+        res.send({data: "Ha ocurrido un error"})
+        console.log(error)
+    }
 }
 
 export async function actualizarGrupo(req, res){

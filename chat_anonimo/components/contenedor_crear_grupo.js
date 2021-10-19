@@ -1,28 +1,12 @@
 export default function contenedor_crear_grupo(){
 
-	function objToQueryString(obj) {
-		const keyValuePairs = [];
-		for (const key in obj) {
-		  keyValuePairs.push(encodeURIComponent(key) + '=' + encodeURIComponent(obj[key]));
-		}
-		return keyValuePairs.join('&');
-	  }
-
     const registerGroup = async event => {
         
         event.preventDefault()
 
-		const queryString = objToQueryString({
-			'nombreGrupo': encodeURIComponent(event.target.nombre.value),
-			'descripcionGrupo': encodeURIComponent(event.target.descripcion.value),
-			'fotoGrupo': encodeURIComponent(event.target.foto.value),
-		});
-		
 		const nombreGrupo = encodeURIComponent(event.target.nombre.value);
 		const descripcionGrupo = encodeURIComponent(event.target.descripcion.value);
 		const fotoGrupo = encodeURIComponent(event.target.foto.value);
-
-		//?nombreGrupo=${nombreGrupo}?descripcionGrupo=${descripcionGrupo}?fotoGrupo=${fotoGrupo}
 
 		const res = await fetch(`http://localhost:4000/grupo/crearGrupo?nombreGrupo=${nombreGrupo}&descripcionGrupo=${descripcionGrupo}&fotoGrupo=${fotoGrupo}`, {
 			headers: {
@@ -30,28 +14,10 @@ export default function contenedor_crear_grupo(){
 			}, 
 			method: 'GET'
 		})
-
-		/*const res = await fetch('http://localhost:4000/grupo/crearGrupo?nombreGrupo='+nombreGrupo+'?descripcionGrupo='+descripcionGrupo+'?fotoGrupo='+fotoGrupo, {
-			headers: {
-				'Content-Type': 'multipart/form-data'
-			}, 
-			method: 'GET'
-		})
-
-        const res = await fetch('http://localhost:4000/grupo/crearGrupo', {
-			body: JSON.stringify({
-				nombreGrupo: event.target.nombre.value,
-				'descripcionGrupo': event.target.descripcion.value,
-				'fotoGrupo': event.target.foto.value
-			  }),  
-			headers: {
-            'Content-Type': 'multipart/form-data'
-          	}, 
-          	method: 'POST'
-        })*/
-    
+ 
         const result = await res.json()
         console.log(result)
+		alert(result.data);
       }
 
     return (
