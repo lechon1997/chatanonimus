@@ -4,13 +4,17 @@ export default function Contenedor_login(){
     const registerUser = async event => {
         
         event.preventDefault()
-        console.log(event)
-        const res = await fetch('http://localhost:4000/usuario/', {
+        
+        const nickname = encodeURIComponent(event.target.nickname.value)
+        const password = encodeURIComponent(event.target.password.value)
+        
+        const res = await fetch('http://localhost:4000/usuario/auth', {
           body: JSON.stringify({
-            name: event.target.name.value
+            nickname ,
+            password
           }),
           headers: {
-            'Content-Type': 'multipart/form-data'
+            'Content-Type': 'application/json; charset=utf-8'
           },
           method: 'POST'
         })
@@ -30,7 +34,7 @@ export default function Contenedor_login(){
         <div className=" d-flex flex-column justify-content-center  mb-2" >
             
             <div className="mx-1 mb-2 ">
-                <input  className="w-100 px-2 h-40px rounded border-secondary" name="username" type="text" placeholder="Usuario"/>
+                <input  className="w-100 px-2 h-40px rounded border-secondary" name="nickname" type="text" placeholder="Usuario"/>
             </div>
 
             <div className="mx-1 mb-4">
