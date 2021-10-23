@@ -5,7 +5,7 @@ export default function Contenedor_reg(){
 
         event.preventDefault()
     
-        const res = await fetch('/api/usuario', {
+        const res = await fetch('http://localhost:4000/usuario/', {
           body: JSON.stringify({
             name: event.target.name.value
           }),
@@ -20,7 +20,7 @@ export default function Contenedor_reg(){
       }
 
     return (
-        <div className="shadow border p-3 rounded w-75">
+        <div className="shadow rounded p-3 w-75 bg-white opacity-75">
             <h2 className="mx-1 mb-4">Registrarse</h2>
         <form onSubmit={registerUser}>
         <div className=" d-flex flex-column justify-content-center mb-2" >
