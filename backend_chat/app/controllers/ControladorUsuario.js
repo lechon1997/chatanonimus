@@ -33,7 +33,9 @@ export async function eliminarUsuario(req, res){
 }
 
 export async function autenticarUsuario(req, res){
-    
+    const dato = req.params.id
+    res.send({data: dato})
+    console.log("OK")
 }
 
 //RANCIADA ABAJO
