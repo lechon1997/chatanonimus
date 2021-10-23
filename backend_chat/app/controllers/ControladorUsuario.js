@@ -11,7 +11,17 @@ export async function getUsuario(req, res){
 }
 
 export async function crearUsuario(req, res){
-    
+    const nickname = req.query["nickname"];
+    const nombre = req.query["nombre"];
+    const apellido = req.query["apellido"];
+    const celular = req.query["celular"];
+    const foto = req.query["foto"];
+    const password = req.query["password"];
+
+    const usuario = new Usuario({nickname: nickname, nombre: nombre, apellido: apellido,celular: celular, foto: foto, password: password});
+    usuario.save();
+
+    res.send({nickname, nombre, apellido, celular, foto, password})
 }
 
 export async function actualizarUsuario(req, res){

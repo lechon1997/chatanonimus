@@ -1,13 +1,28 @@
 import mongoose from "mongoose";
 
 const UsuarioSchema = new mongoose.Schema({
-    nombre:{
+    nickname:{
         type: String,
         unique: true,
         required: true
     },
-    password:{
+    nombre:{
+        type: String,
+        required: true
+    },
+    apellido:{
+        type: String,
+        required: true
+    },
+    celular:{
         type: String
+    },
+    foto:{
+        type: String
+    },
+    password:{
+        type: String,
+        required: true
     }
 },{
     versionKey:false,
