@@ -3,11 +3,11 @@ import { getUsuarios, getUsuario, crearUsuario, actualizarUsuario, autenticarUsu
 
 const routerUsuario = Router()
 
-routerUsuario.post('/',getUsuarios)
-routerUsuario.get('/:id',getUsuario)
-routerUsuario.post('/',crearUsuario)
-routerUsuario.patch('/:id',actualizarUsuario)
-routerUsuario.delete('/:id',eliminarUsuario)
-routerUsuario.post('/auth',autenticarUsuario)
+//routerUsuario.post('/',getUsuarios)
+//routerUsuario.get('/:id',getUsuario)
+routerUsuario.get('/crearUsuario',crearUsuario)
+//routerUsuario.patch('/:id',actualizarUsuario)
+//routerUsuario.delete('/:id',eliminarUsuario)
+//routerUsuario.post('/auth',autenticarUsuario)
 
 export default routerUsuario

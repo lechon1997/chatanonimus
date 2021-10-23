@@ -31,6 +31,8 @@ export async function autenticarUsuario(req, res){
     try {
         let usuario = await Usuario.findOne(nickname)
         if (usuario){
+            //if ( usuario.password = )
+            next()
             res.status(200).send({'msg': 'success'})
         }else{
             res.status(200).send({'msg': 'El usuario no existe'})
