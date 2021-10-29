@@ -14,6 +14,24 @@ export async function getUsuario(req, res){
 
 export async function crearUsuario(req, res){
     
+    try{
+        const { password, nickname } = req.body;
+        let usuario = await Usuario.findOne({nickname})
+        
+        if (usuario){
+            res.status(200).send({'msg':'El usuario ya existe'})
+        }else{
+            const usuario = new Usuario(req.body);
+            const salt = await bcrypt.genSalt(10)
+            usuario.password = await bcrypt.hash(password, salt)
+            await usuario.save();
+            res.status(200).send({'msg':'success'})
+        }
+    }catch(err){
+        console.log(err)
+        res.send({'msg':err})
+    }
+    
 }
 
 export async function actualizarUsuario(req, res){
@@ -27,24 +45,39 @@ export async function eliminarUsuario(req, res){
 export async function autenticarUsuario(req, res){
     
     const { nickname , pass } = req.body
-    
+    console.log(pass)
+
     try {
-        let usuario = await Usuario.findOne(nickname)
-        if (usuario){
-            //if ( usuario.password = )
-            next()
-            res.status(200).send({'msg': 'success'})
-        }else{
-            res.status(200).send({'msg': 'El usuario no existe'})
+        let usuario = await Usuario.findOne({nickname})
+
+        if(!usuario){
+            return res.json({'msg': 'El usuario no existe'})
         }
-    }catch(err){
-        res.send({data: err})
-    }
+
+        const passCorrecto = await bcrypt.compare(pass, usuario.password)
+        if(!passCorrecto){
+            return res.json({'msg': 'Contraseña incorrecta'})
+        }
+
+        //TOKEN
+        const payload = {
+            usuario: {
+                id: usuario.id
+            }
+        };
+
+        jwt.sign(payload, process.env.SECRET, {
+            expiresIn: 3600 * 6 //DURACIÓN : 6 HORAS
+        }, (error, token) => {
+            if(error) throw error;
+            
+            return res.json({'msg':token})
+        })
+
     
-    const salt = await bcrypt.genSalt(10)
-    const hash = bcrypt.hash(pass, salt)
-    res.send({data: req.body})
-    console.log("OK")
+    }catch(err){
+        console.log({data: err})
+    }
 }
 
 //RANCIADA ABAJO

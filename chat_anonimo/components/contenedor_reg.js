@@ -1,26 +1,9 @@
 import Link from 'next/link'
 export default function Contenedor_reg(){
     
-    function objToQueryString(obj) {
-        const keyValuePairs = [];
-        for (const key in obj) {
-          keyValuePairs.push(encodeURIComponent(key) + '=' + encodeURIComponent(obj[key]));
-        }
-        return keyValuePairs.join('&');
-    }
-
     const registerUser = async event => {
         
         event.preventDefault()
-
-        const queryString = objToQueryString({
-            'nickname': encodeURIComponent(event.target.nickname.value),
-            'nombre': encodeURIComponent(event.target.nombre.value),
-            'apellido': encodeURIComponent(event.target.apellido.value),
-            'celular': encodeURIComponent(event.target.celular.value),
-            'foto': encodeURIComponent(event.target.foto.value),
-            'password': encodeURIComponent(event.target.password.value)
-        });
 
         const nickname = encodeURIComponent(event.target.nickname.value)
         const nombre = encodeURIComponent(event.target.nombre.value)
@@ -29,13 +12,19 @@ export default function Contenedor_reg(){
         const foto = encodeURIComponent(event.target.foto.value)
         const password = encodeURIComponent(event.target.password.value)
 
-        //?nombreGrupo=${nombreGrupo}?descripcionGrupo=${descripcionGrupo}?fotoGrupo=${fotoGrupo}
-
-        const res = await fetch(`http://localhost:4000/usuario/crearUsuario?nickname=${nickname}&nombre=${nombre}&apellido=${apellido}&celular=${celular}&foto=${foto}&password=${password}`, {
+        const res = await fetch('http://localhost:4000/usuario/crearUsuario', {
+            body: JSON.stringify({
+                nickname ,
+                nombre,
+                apellido,
+                celular,
+                foto,
+                password
+              }),
             headers: {
-                'Content-Type': 'multipart/form-data'
-            }, 
-            method: 'GET'
+                'Content-Type': 'application/json; charset=utf-8'
+              },
+            method: 'POST'
         })
     
         const result = await res.json()

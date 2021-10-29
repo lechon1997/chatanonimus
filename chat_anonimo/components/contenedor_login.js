@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import jwt_decode from 'jwt-decode';
 export default function Contenedor_login(){
 
     const registerUser = async event => {
@@ -11,7 +12,7 @@ export default function Contenedor_login(){
         const res = await fetch('http://localhost:4000/usuario/auth', {
           body: JSON.stringify({
             nickname ,
-            password
+            pass: password
           }),
           headers: {
             'Content-Type': 'application/json; charset=utf-8'
@@ -19,8 +20,32 @@ export default function Contenedor_login(){
           method: 'POST'
         })
     
-        const result = await res.json()
-        console.log(result)
+        const { msg } = await res.json()
+        console.log(msg)
+
+        switch(msg){
+          	case 'El usuario no existe':
+				console.log("El usuario no existe")
+				break
+        	case 'Contraseña incorrecta':
+				console.log("Contraseña incorrecta")
+				break
+			default:
+              console.log("ranciada")
+              localStorage.setItem('token', token);
+              var xdd = localStorage.getItem('token');
+              //var decoded = await jwt_decode(xdd);
+              window.location.href = "http://localhost:3000/inicio/"
+              break
+        }
+        
+        //window.localStorage;
+        
+        
+        
+          
+     
+        
       }
 
     return (

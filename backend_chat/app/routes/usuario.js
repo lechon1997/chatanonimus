@@ -5,9 +5,9 @@ const routerUsuario = Router()
 
 //routerUsuario.post('/',getUsuarios)
 //routerUsuario.get('/:id',getUsuario)
-routerUsuario.get('/crearUsuario',crearUsuario)
+routerUsuario.post('/crearUsuario',crearUsuario)
 //routerUsuario.patch('/:id',actualizarUsuario)
 //routerUsuario.delete('/:id',eliminarUsuario)
-//routerUsuario.post('/auth',autenticarUsuario)
+routerUsuario.post('/auth',autenticarUsuario)
 
 export default routerUsuario
