@@ -9,6 +9,11 @@ dotenv.config()
 const app = express()
 const port = process.env.PORT || 4000
 
+app.get("/", (req,res)=>{
+    res.send("xd")
+})
+
+
 app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
