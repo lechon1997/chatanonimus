@@ -49,11 +49,14 @@ export default function Contenedor_login(){
       }
 
     return (
-        <div className="shadow rounded altura-xd w-75 bg-white">
-          <div className=" d-flex ps-2 pb-1 pt-2 mb-3 bg-primary rounded-top ">
+        <div className="shadow rounded altura-xd bg-white">
+        
+        
+         <div className=" d-flex ps-2 pb-1 pt-2 mb-3 bg-primary rounded-top ">
             <h2 className="text-white me-auto " >Iniciar sesión</h2>
             <i className="bi bi-chat text-white me-4 "></i>
-          </div>
+        </div>
+        
             
         <form className="p-3 " onSubmit={registerUser}>
         <div className=" d-flex flex-column justify-content-center  mb-2" >
@@ -71,12 +74,13 @@ export default function Contenedor_login(){
             
         </div>
         </form>
-        <div className="mx-1 d-flex ">
-        <Link  href="http://localhost:3000/usuario/registrarse">
-          <a className="link-primary me-auto bd-highlight">Registrarse</a>
-        </Link>
-        <a className="link-primary  bd-highlight">¿Olvidaste tu contraseña?</a>
+        <div className="mx-3 pb-2 d-flex align-items-end altura_footer_login">
+          <Link  href="http://localhost:3000/usuario/registrarse">
+            <a className="link-primary me-auto">Registrarse</a>
+          </Link>
+        <a className="link-primary">¿Olvidaste tu contraseña?</a>
         </div>
+        
         </div>
     )
 

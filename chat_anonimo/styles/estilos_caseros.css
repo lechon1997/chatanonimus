@@ -6,13 +6,258 @@
     height:40px;
 }
 
+
+
 .altura-xd{
     height:300px;
     min-height:300px;
 }
 
+.contenedor_inicio{
+    width: 100%;
+    height: 100%;
+    background-color:#212121;
+    display:flex;
+    flex-direction : column;
+}
 
+.inicioxd{
+    width: 100%;
+    height: 100%;
+    
+}
 
+.altura_footer_login{
+    height:50px;
+}
+
+.div_cabecera{
+    flex:0;
+    margin:0px;
+    padding:0px;
+    max-height: 0px;
+}
+
+.div_content{
+    height:100%;
+    flex:10;
+    display:flex;
+}
+
+.div_mensajes{
+    display:flex;
+    flex-direction: column;
+    height: 100%;
+    flex:8;
+    background-color:#424242;
+}
+
+.div_grupos{
+    flex:2;
+    height: 100%;
+    display:flex;
+    flex-direction : column;
+    
+    max-width: 300px;
+    min-width: 300px;
+    background-color:#212121;
+    padding: 6px 6px;
+
+    overflow: auto;
+    scroll-behavior: smooth;
+    height: 100%;
+}
+
+.div_grupos::-webkit-scrollbar{
+    width: 8px;
+    
+}
+
+.div_grupos::-webkit-scrollbar-thumb{
+    background-color: #616161;
+    border-radius: 5px;    
+}
+
+.Grupo{
+    display:flex;
+    width: 100%;
+    height: 70px;
+    background-color: #424242;
+    border-radius:4px;
+    padding:5px;
+    margin-bottom: 4px;
+    transition: background-color 0.1s, transform 0.1s;
+}
+
+.imagen_grupo_en_cabecera_mensajes{
+    display:flex;
+    justify-content:center;
+    flex-direction: column;
+    align-items: center;
+
+    background-color:#757575;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+}
+
+.div_contenedor_grupo{
+    flex:8;
+    height: 80%;
+    display: flex;
+    flex-direction : column;
+    align-items: center;
+    justify-content:center;
+}
+
+.mensajes_grupo::-webkit-scrollbar{
+    width: 8px;
+    
+}
+
+.mensajes_grupo::-webkit-scrollbar-thumb{
+    background-color: #616161;
+    border-radius: 5px;    
+}
+
+/*NO QUITAR EL HEIGHT DE AQUÍ*/
+.mensajes_grupo{
+    flex:8;
+    width: 100%;
+    height: 100%;
+    padding:12px;
+    overflow: auto;
+    scroll-behavior: smooth;
+    
+}
+
+.section_escribir_mensaje{
+    flex:2;
+    display: flex;
+    justify-content:center;
+    width: 100%;
+    height: 50px;
+    max-height:50px;
+    background-color: #282828;
+    position: sticky;
+    
+}
+
+.content_escribir_mensaje{
+    display:flex;
+    height: 100%;
+    padding-top:8px;
+    width:55%;
+    max-width: 700px;
+}
+
+.escribir_mensaje{
+    flex:9;
+    
+    height:40px;
+    padding-left: 16px;
+    
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border:0px solid black;
+    background-color: #616161;
+    color:white;
+}
+
+.xD{
+    color:#BDBDBD;
+}
+.div_icono_escribir_mensaje{
+    flex:1;
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    height:40px;
+    background-color: #616161;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    background-color:#616161 ;
+}
+
+.posicion_mi_mensaje{
+    display:flex;
+    width:auto;
+    flex-direction:row-reverse;
+    
+}
+
+.posicion_mi_mensaje p{
+    margin: 0px;
+}
+
+.acomodando_la_hora_xd{
+    display: flex;
+    margin-top: 10px;
+    flex-direction: column-reverse;
+    margin-left: 16px;
+}
+
+.acomodando_la_hora_xd p {
+    font-size:11px;
+    max-width: 400px;
+
+}
+
+.estilos_mi_mensaje{
+    display:flex;
+    margin-right: 100px;
+    margin-bottom: 4px;
+    max-width: 400px;
+    padding:4px 18px;
+    border-radius: 16px;
+    background-color:#673AB7;
+    color:white;
+}
+
+.escribir_mensaje::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #BDBDBD;
+
+  }
+
+.Grupo:hover{
+    cursor: pointer;
+    transform: scale(1.02);
+    background-color:#616161;
+}
+
+.div_imagen_grupo{
+    display:flex;
+    justify-content:center;
+    flex-direction: column;
+    align-items: center;
+
+    background-color:#757575;
+    width: 60px;
+    border-radius: 30px;
+}
+
+.cabecera_div_mensajes{
+    flex:1;
+    display: flex;
+    max-height:50px;
+    width: 100%;
+    background-color: #424242;
+    padding-top:6px;
+    padding-left: 8px;
+    background-color: #212121;
+
+}
+
+.nombre_grupo{
+    color:#EEEEEE;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.mensaje_en_div_grupo{
+    font-size: 12px;
+    color:#EEEEEE;
+}
 
 input:focus{
     outline:none;
@@ -39,4 +284,15 @@ a:hover{
 body{
     background:url(../public/images/alone.jpg) no-repeat center center fixed;
     background-size: cover;
+}
+
+html, body{
+    width:100%;
+    height:100%;
+}
+
+
+#__next{
+    width:100%;
+    height:100%;
 }
