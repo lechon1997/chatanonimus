@@ -46,7 +46,7 @@ export default function Contenedor_grupo(){
                     {
                         mensajes.map(mensaje => (
                             <Mensaje
-                                
+                                Key={mensaje.id}
                                 mensaje={mensaje}
                             />
                         ))
