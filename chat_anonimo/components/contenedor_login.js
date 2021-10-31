@@ -1,15 +1,18 @@
 import Link from 'next/link'
 import jwt_decode from 'jwt-decode';
-export default function Contenedor_login(){
 
+export default function Contenedor_login(){
+  
     const registerUser = async event => {
         
         event.preventDefault()
         
         const nickname = encodeURIComponent(event.target.nickname.value)
         const password = encodeURIComponent(event.target.password.value)
+        const url = process.env.URL_PRODUCCION + '/usuario/auth'
+        console.log(url)
         
-        const res = await fetch('http://localhost:4000/usuario/auth', {
+        const res = await fetch( url, {
           body: JSON.stringify({
             nickname ,
             pass: password
@@ -31,11 +34,18 @@ export default function Contenedor_login(){
 				console.log("Contraseña incorrecta")
 				break
 			default:
-              console.log("ranciada")
-              localStorage.setItem('token', token);
-              var xdd = localStorage.getItem('token');
+            
+              if (typeof window !== 'undefined') {
+                localStorage.setItem('token', JSON.stringify(msg))
+                
+                
               //var decoded = await jwt_decode(xdd);
-              window.location.href = "http://localhost:3000/inicio/"
+               window.location.href = "http://localhost:3000/inicio/"
+            }
+            
+
+              
+              
               break
         }
         

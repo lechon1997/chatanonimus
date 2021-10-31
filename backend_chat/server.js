@@ -17,4 +17,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/usuario',routerUsuario)
 app.use('/grupo',routerGrupo)
 app.listen(port,console.log('Server up'))
-initDB()
+try{
+    initDB()
+}catch(err){
+    console.log(err)
+}

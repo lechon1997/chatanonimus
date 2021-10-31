@@ -3,7 +3,10 @@ import { getUsuarios, getUsuario, crearUsuario, actualizarUsuario, autenticarUsu
 
 const routerUsuario = Router()
 
-//routerUsuario.post('/',getUsuarios)
+routerUsuario.post('/',getUsuarios)
+routerUsuario.get('/',(req, res)=>{
+    res.send('Hello World!')
+})
 //routerUsuario.get('/:id',getUsuario)
 routerUsuario.post('/crearUsuario',crearUsuario)
 //routerUsuario.patch('/:id',actualizarUsuario)

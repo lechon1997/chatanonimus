@@ -6,7 +6,46 @@
     height:40px;
 }
 
+.panel_mensajes{
+    
+    max-width: 230px;
+    flex: 7;
+    background-color:#282828;
+    padding-top: 12px;
 
+}
+
+.boton_panel{
+    display: flex;
+    align-items: center;
+    color: #E0E0E0;
+    padding-left: 12px;
+    
+}
+.boton_panel:hover{
+    background-color:#424242;
+}
+
+.boton_panel a{
+    
+    display: flex;
+    padding-left: 12px;
+    align-items: center;
+    height: 60px;
+    font-size: 18px;
+}
+
+.boton_panel a:hover{
+    text-decoration:none;
+}
+
+
+.ranciadaa{
+    background-color:#424242;
+    flex:3;
+    display: flex;
+    flex-direction: column;
+}
 
 .altura-xd{
     height:300px;
@@ -105,9 +144,8 @@
     flex:8;
     height: 80%;
     display: flex;
-    flex-direction : column;
-    align-items: center;
-    justify-content:center;
+    background-color: #282828;
+
 }
 
 .mensajes_grupo::-webkit-scrollbar{
@@ -122,9 +160,9 @@
 
 /*NO QUITAR EL HEIGHT DE AQUÍ*/
 .mensajes_grupo{
-    flex:8;
+    flex:9;
     width: 100%;
-    height: 100%;
+
     padding:12px;
     overflow: auto;
     scroll-behavior: smooth;
@@ -132,7 +170,7 @@
 }
 
 .section_escribir_mensaje{
-    flex:2;
+    flex:1;
     display: flex;
     justify-content:center;
     width: 100%;
