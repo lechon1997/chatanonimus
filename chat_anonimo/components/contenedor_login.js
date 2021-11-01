@@ -34,11 +34,11 @@ export default function Contenedor_login(){
 				break
 			default:
 
-				if (typeof window !== 'undefined') {
+				
 					const url = process.env.URL_FRONTEND + "/inicio/"
 					localStorage.setItem('token', msg)
 					window.location.href = url
-				}
+				
 				
         break
         }
