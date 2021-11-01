@@ -43,7 +43,7 @@ export default function Contenedor_login(){
         }
         
         //window.localStorage;
-        
+        localStorage.clear()
         
         
           
