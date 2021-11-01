@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
 
 const GrupoSchema = new mongoose.Schema({
+    usuario_id:{
+        type: String,
+        required: true
+    },
     nombre:{
         type: String,
         required: true

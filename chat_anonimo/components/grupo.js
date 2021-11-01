@@ -1,7 +1,9 @@
 
 import Cabecera_grupo from './cabecera_grupo'
 import Contenedor_grupo from './contenedor_grupo'
-export default function Grupo(){
+export default function Grupo({id}){
+    
+    
 
     return (
         <div className="div_mensajes">

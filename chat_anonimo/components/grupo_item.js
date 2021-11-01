@@ -1,9 +1,12 @@
 
+import React,{useContext } from 'react'
+import { UsuarioContext } from '../context/usuarioContext'
+import Grupo from './grupo'
 
-export default function Grupo_item(){
-
+export default function Grupo_item({nombreGrupo, descGrupo, cambiarGrupo,id}){
+    const { setGrupovista, setIdGrupovista } = useContext(UsuarioContext)
     return (
-        <div className="Grupo">
+        <div onClick={ () =>{ setGrupovista(<Grupo id={id}/>); setIdGrupovista(id) }} className="Grupo">
 						
             {/* DIV IMAGEN DEL GRUPO*/}
             <div className="div_imagen_grupo">
@@ -16,8 +19,12 @@ export default function Grupo_item(){
 
             {/* DIV INFO GRUPO*/}
             <div className="">
-                <p className="m-0 mb-1 ms-3 nombre_grupo">Grupo de Garcas</p>
-                <p className="ms-3 mensaje_en_div_grupo">Pinato: Me pica la cola mmm</p>
+                <p className="m-0 mb-1 ms-3 nombre_grupo">{ nombreGrupo }</p>
+                <div className="mensajitos_para_decorar_xd">
+                    <p className="ms-3 mensaje_en_div_grupo">{ descGrupo }</p>
+                    <p className="ms-3 mensaje_en_div_grupo mensajes_sin_leer">2 comentarios nuevos</p>
+                </div>
+                
             </div>
         </div>
         

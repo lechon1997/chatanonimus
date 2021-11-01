@@ -1,12 +1,10 @@
 import { Usuario } from '../models/usuario.js'; 
+import { Grupo } from '../models/grupo.js';
+import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken'
 
-export async function getUsuarios(req, res){
-    res.send({data: "xDDD"})
-    console.log("xDDD2")
 
-}
 
 export async function getUsuario(req, res){
     
@@ -59,10 +57,13 @@ export async function autenticarUsuario(req, res){
             return res.json({'msg': 'Contraseña incorrecta'})
         }
 
+        const grupos = await Grupo.find({usuario_id:usuario.id})
+        console.log(grupos)
         //TOKEN
         const payload = {
             usuario: {
-                id: usuario.id
+                id: usuario.id,
+                grupos
             }
         };
 
@@ -78,6 +79,18 @@ export async function autenticarUsuario(req, res){
     }catch(err){
         console.log({data: err})
     }
+}
+
+export async function informacionUsuario(req, res){
+    const { id_usu } = req.body
+    Usuario.findById(id_usu, (error, usuario) => {
+        if(error){
+            console.log(error)
+        }else{
+            return res.json({usuario})
+        }
+        
+    });
 }
 
 //RANCIADA ABAJO

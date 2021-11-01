@@ -11,8 +11,9 @@ export default function Contenedor_reg(){
         const celular = encodeURIComponent(event.target.celular.value)
         const foto = encodeURIComponent(event.target.foto.value)
         const password = encodeURIComponent(event.target.password.value)
+        const url = process.env.BACKEND + "/usuario/crearUsuario"
 
-        const res = await fetch('http://localhost:4000/usuario/crearUsuario', {
+        const res = await fetch(url, {
             body: JSON.stringify({
                 nickname ,
                 nombre,

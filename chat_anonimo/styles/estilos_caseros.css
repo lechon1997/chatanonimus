@@ -6,6 +6,32 @@
     height:40px;
 }
 
+.panel_grupos{
+    display: flex;
+    flex-direction: column;
+    color:#f8f9fa;
+    
+}
+
+.panel_actions_grupo div {
+    width:100px;
+    margin-left: 18px;;
+}
+
+.panel_actions_grupo div a { 
+    margin-left: 6px;
+}
+.panel_actions_grupo div:hover{
+    color:#E91E63;
+}
+
+.panel_actions_grupo{
+    padding-top: 4px;
+    display: flex;
+    height:50px;
+    max-height: 50px;
+}
+
 .panel_mensajes{
     
     max-width: 230px;
@@ -24,6 +50,88 @@
 }
 .boton_panel:hover{
     background-color:#424242;
+}
+
+.purple_bien_de_macho{
+    width: 100%;
+    margin:0px;
+    border:1px solid #673AB7;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    background-color: #673AB7;
+}
+
+.purple_bien_de_macho p{
+    margin-left: 12px;
+    font-weight: 600;
+    margin-top:8px;
+    font-size: 14px;
+}
+
+
+.contenedor_formulario_grupo{
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    border:1px solid #673AB7;
+    border-radius: 16px;
+    height:220px;
+    margin:14px;
+}
+
+.xdd2{
+    background-color: transparent;
+    border:0px solid black;
+    color:#f8f9fa;
+    font-size: 14px
+}
+.xdd2:hover{
+    color:#673AB7;
+}
+.input_crear_grupo{
+    width:90%;
+    height:35px;
+    padding-left: 16px;
+    border-radius: 20px;
+    border:0px solid black;
+    background-color: #616161;
+    font-size: 14px;
+    color:white;
+    margin-top:12px;
+}
+
+
+.error_grupo{
+    margin-left: 32px;
+    padding-top:8px;
+    width:100%;
+    height:20px;
+    font-size:14px;
+    color: #F44336;
+}
+.confirmar_grupo{
+    width: 100%;
+    height:40px;
+    display: flex;
+    justify-content:flex-end; 
+    flex-direction: row;
+}
+
+.confirmar_grupo div{
+    margin-top: auto;
+    margin-right: 14px;
+    height:25px;
+}
+
+.confirmar_grupo div:hover{
+    color:#673AB7;
+}
+
+.input_crear_grupo::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #BDBDBD;
+
 }
 
 .boton_panel a{
@@ -101,6 +209,7 @@
     min-width: 300px;
     background-color:#212121;
     padding: 6px 6px;
+    padding-top:0px;
 
     overflow: auto;
     scroll-behavior: smooth;
@@ -189,14 +298,15 @@
     max-width: 700px;
 }
 
+
+
 .escribir_mensaje{
     flex:9;
     
     height:40px;
     padding-left: 16px;
     
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
+    border-radius: 20px;
     border:0px solid black;
     background-color: #616161;
     color:white;
@@ -260,7 +370,7 @@
 .Grupo:hover{
     cursor: pointer;
     transform: scale(1.02);
-    background-color:#616161;
+    background-color:#4B4B4B;
 }
 
 .div_imagen_grupo{
@@ -294,7 +404,16 @@
 
 .mensaje_en_div_grupo{
     font-size: 12px;
-    color:#EEEEEE;
+    color:#AB47BC;
+}
+
+.mensajes_sin_leer{
+    color:#9CCC65;
+}
+
+
+.mensajitos_para_decorar_xd p{
+    margin-bottom: 0px;
 }
 
 input:focus{

@@ -1,17 +1,16 @@
 import Link from 'next/link'
-import jwt_decode from 'jwt-decode';
+
 
 export default function Contenedor_login(){
-  
+    
     const registerUser = async event => {
         
         event.preventDefault()
         
         const nickname = encodeURIComponent(event.target.nickname.value)
         const password = encodeURIComponent(event.target.password.value)
-        const url = process.env.URL_PRODUCCION + '/usuario/auth'
-        console.log(url)
-        
+        const url = process.env.URL_BACKEND + '/usuario/auth'
+    
         const res = await fetch( url, {
           body: JSON.stringify({
             nickname ,
@@ -24,8 +23,7 @@ export default function Contenedor_login(){
         })
     
         const { msg } = await res.json()
-        console.log(msg)
-
+        
         switch(msg){
           	case 'El usuario no existe':
 				console.log("El usuario no existe")
@@ -34,19 +32,14 @@ export default function Contenedor_login(){
 				console.log("Contraseña incorrecta")
 				break
 			default:
-            
-              if (typeof window !== 'undefined') {
-                localStorage.setItem('token', JSON.stringify(msg))
-                
-                
-              //var decoded = await jwt_decode(xdd);
-               window.location.href = "http://localhost:3000/inicio/"
-            }
-            
 
-              
-              
-              break
+				if (typeof window !== 'undefined') {
+					const url = process.env.URL_FRONTEND + "/inicio/"
+					localStorage.setItem('token', msg)
+					window.location.href = url
+				}
+				
+        break
         }
         
         //window.localStorage;
