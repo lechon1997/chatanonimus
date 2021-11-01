@@ -1,10 +1,10 @@
 module.exports = {
   reactStrictMode: true,
   env: {
-    //https://backend-chat-anonimus.herokuapp.com BACKEND
-    // https://chatanonimus2.vercel.app FRONTEND
-    URL_BACKEND: 'http://localhost:4000',
-    URL_FRONTEND: 'http://localhost:3000'
+    //http://localhost:4000 BACKEND
+    //http://localhost:3000 FRONTEND
+    URL_BACKEND: 'https://backend-chat-anonimus.herokuapp.com',
+    URL_FRONTEND: 'https://chatanonimus2.vercel.app'
     
   }
 }

@@ -44,7 +44,7 @@ export default function contenedor_inicio() {
 	}, [])
 
 	
-	//console.log(grupos)
+	console.log(grupos)
 
 	const [formularioGrupo, setFormularioGrupo] = useState(false)
 	return (
