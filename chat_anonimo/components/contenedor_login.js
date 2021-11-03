@@ -36,6 +36,7 @@ export default function Contenedor_login(){
 
 				
 					const url = process.env.URL_FRONTEND + "/inicio/"
+					window.alert(url)
 					localStorage.setItem('token', msg)
 					window.location.href = url
 				
