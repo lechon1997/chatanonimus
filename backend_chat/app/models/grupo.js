@@ -21,4 +21,8 @@ const GrupoSchema = new mongoose.Schema({
     timestamps:true
 })
 
+GrupoSchema.methods.setImgUrl = function setImgUrl(filename){
+    this.foto = filename;
+}
+
 export const Grupo = mongoose.model('grupos', GrupoSchema)

@@ -1,4 +1,4 @@
-import { Grupo } from '../models/grupo.js'; 
+import { Grupo } from '../models/grupo.js';
 
 export async function getGrupos(req, res){
     const { id_usu } = req.body
@@ -12,13 +12,14 @@ export async function getGrupo(req, res){
 }
 
 export async function crearGrupo(req, res){
-    const id_usu = req.query["usuario_id"]
-    const nombreGrupo = req.query["nombreGrupo"];
-    const descripcionGrupo = req.query["descripcionGrupo"];
-    const fotoGrupo = req.query["fotoGrupo"];
+    const { nombreGrupo, descripcionGrupo, id_usuario } = req.body;
 
     try{
-        const grupo = new Grupo({usuario_id: id_usu, nombre: nombreGrupo, descripcion: descripcionGrupo, foto: fotoGrupo});
+        const grupo = new Grupo({usuario_id: id_usuario, nombre: nombreGrupo, descripcion: descripcionGrupo});
+        if(req.file){
+            const {filename} = req.file
+            grupo.setImgUrl(filename)
+        }
         await grupo.save();
         res.send({
             data: "Se ha creado el grupo correctamente",
@@ -26,8 +27,8 @@ export async function crearGrupo(req, res){
         })
 
     }catch(error){
-        res.send({data: "Ha ocurrido un error"})
-        console.log(error)
+        res.send({data: "xd"+error})
+        console.log(error)     
     }
 }
 

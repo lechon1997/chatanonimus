@@ -1,6 +1,5 @@
 import Link from 'next/link'
 
-
 export default function Contenedor_login(){
     
     const registerUser = async event => {
@@ -14,7 +13,7 @@ export default function Contenedor_login(){
     
         const res = await fetch( url, {
           body: JSON.stringify({
-            nickname ,
+            nickname,
             pass: password
           }),
           headers: {
@@ -26,37 +25,27 @@ export default function Contenedor_login(){
         const { msg } = await res.json()
         
         switch(msg){
-          	case 'El usuario no existe':
+        	case 'El usuario no existe':
 				console.log("El usuario no existe")
 				break
         	case 'Contraseña incorrecta':
 				console.log("Contraseña incorrecta")
 				break
 			default:
-
-				
-					const url = process.env.URL_FRONTEND + "/inicio/"
-					localStorage.setItem('token', msg)
-					window.location.href = url
-				
-				
-        break
+          		localStorage.clear()				
+				const url = process.env.URL_FRONTEND + "/inicio/"
+				localStorage.setItem('token', msg)
+				window.location.href = url			
+        		break
         }
         
         //window.localStorage;
-        localStorage.clear()
-        
-        
-          
      
-        
       }
 
     return (
-        <div className="shadow rounded altura-xd bg-white">
-        
-        
-         <div className=" d-flex ps-2 pb-1 pt-2 mb-3 bg-primary rounded-top ">
+        <div className="shadow rounded altura-xd bg-white"> 
+        <div className=" d-flex ps-2 pb-1 pt-2 mb-3 bg-primary rounded-top ">
             <h2 className="text-white me-auto " >Iniciar sesión</h2>
             <i className="bi bi-chat text-white me-4 "></i>
         </div>
