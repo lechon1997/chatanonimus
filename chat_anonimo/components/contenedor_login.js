@@ -13,6 +13,7 @@ export default function Contenedor_login(){
     
         const res = await fetch( url, {
           body: JSON.stringify({
+            
             nickname,
             pass: password
           }),
