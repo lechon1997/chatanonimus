@@ -3,7 +3,7 @@ import Escribir_mensaje from './escribir_mensaje'
 import {useState} from 'react';
 import Comentarios_nuevos from './comentarios_nuevos'
 import Comentarios_leidos from './comentarios_leidos'
-import Ver_miembros from './ver_miembros'
+import Ver_grupo from './ver_grupo'
 import Agregar_miembros from './Agregar_miembros'
 import Enviar_comentario from './crear_comentario'
 
@@ -65,7 +65,7 @@ export default function Contenedor_grupo(){
                             <path fillRule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z"/>
                             <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
                         </svg>
-                            <a onClick={ () => { cambiarVista(Ver_miembros)}} className="link-light w-100" >Ver miembros</a>
+                            <a onClick={ () => { cambiarVista(Ver_grupo)}} className="link-light w-100" >Ver grupo</a>
                         
                     </div>
 

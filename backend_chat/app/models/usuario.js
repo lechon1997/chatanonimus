@@ -23,6 +23,9 @@ const UsuarioSchema = new mongoose.Schema({
     password:{
         type: String,
         required: true
+    },
+    socket_id:{
+        type: String
     }
 },{
     versionKey:false,

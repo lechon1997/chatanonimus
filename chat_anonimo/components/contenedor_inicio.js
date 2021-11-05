@@ -1,6 +1,7 @@
 import Grupo_item from './grupo_item'
 import React,{ useState, useEffect, useContext } from 'react'
 import { UsuarioContext } from '../context/usuarioContext'
+import { io } from "socket.io-client";
 import jwt_decode from "jwt-decode";
 import Formulario_crear_grupo from './formulario_nuevo_grupo'
 
@@ -13,6 +14,15 @@ export default function contenedor_inicio() {
 		const {usuario} = jwt_decode(token);
 		const url_info_usuario = process.env.URL_BACKEND + '/usuario/'
 		const url_grupos_usuario = process.env.URL_BACKEND + '/grupo/'
+		const socket = io('http://localhost:4000', { transports : ['websocket'] })
+		
+		socket.on("connection", () => {
+			console.log(socket.id); // x8WIv7-mJelg7on_ALbx
+		  });
+
+		  socket.on("disconnect", () => {
+			console.log(socket.id); // undefined
+		  });
 
 		const respuestaInformacionUsuario = await fetch( url_info_usuario, {
 			body: JSON.stringify({

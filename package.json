@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/lechon1997/chatanonimus/issues"
   },
-  "homepage": "https://github.com/lechon1997/chatanonimus#readme"
+  "homepage": "https://github.com/lechon1997/chatanonimus#readme",
+  "dependencies": {
+    "socket.io": "^4.3.1"
+  }
 }
