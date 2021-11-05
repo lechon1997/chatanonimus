@@ -13,7 +13,7 @@ export async function getGrupo(req, res){
 
 export async function crearGrupo(req, res){
     const { nombreGrupo, descripcionGrupo, id_usuario } = req.body;
-
+    console.log(req.file);
     try{
         const grupo = new Grupo({usuario_id: id_usuario, nombre: nombreGrupo, descripcion: descripcionGrupo});
         if(req.file){
