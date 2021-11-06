@@ -14,10 +14,7 @@ export default function contenedor_crear_grupo(){
 			}, 
 			method: 'GET'
 		})
- 
-        const result = await res.json()
-        console.log(result)
-		alert(result.data);
+		
       }
 
     return (

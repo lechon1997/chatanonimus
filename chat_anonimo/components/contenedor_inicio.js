@@ -7,7 +7,7 @@ import Formulario_crear_grupo from './formulario_nuevo_grupo'
 
 
 export default function contenedor_inicio() {
-	const { agregarGrupo, grupos, grupovista, setUsuario } = useContext(UsuarioContext)
+	const { agregarGrupo, grupos, grupovista, setUsuario, setSocket } = useContext(UsuarioContext)
 
 	useEffect( async () =>{
 		let token = localStorage.getItem('token')
@@ -20,9 +20,8 @@ export default function contenedor_inicio() {
 			console.log(socket.id); // x8WIv7-mJelg7on_ALbx
 		  });
 
-		  socket.on("disconnect", () => {
-			console.log(socket.id); // undefined
-		  });
+		
+		setSocket(socket)
 
 		const respuestaInformacionUsuario = await fetch( url_info_usuario, {
 			body: JSON.stringify({

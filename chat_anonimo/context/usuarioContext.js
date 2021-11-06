@@ -13,6 +13,7 @@ export const UsuarioProvider = ({children}) => {
     const [grupos,agregarGrupo] = useState([])
     const [grupovista, setGrupovista] = useState('')
     const [idGrupoVista, setIdGrupovista] = useState('')
+    const [socket_io, setSocket] = useState('')
     
     
     return (
@@ -24,7 +25,9 @@ export const UsuarioProvider = ({children}) => {
                 idGrupoVista,
                 setIdGrupovista,
                 usuario,
-                setUsuario
+                setUsuario,
+                socket_io,
+                setSocket
             }}>
             { children }
         </UsuarioContext.Provider>

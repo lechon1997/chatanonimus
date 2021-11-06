@@ -367,6 +367,19 @@
 
   }
 
+.mequierosuicidar{
+    width:75%;
+    
+}
+
+.alturatextarea{
+    height:200px;
+}
+
+.maximolargoxd{
+    max-width: 850px;
+}
+
 .Grupo:hover{
     cursor: pointer;
     transform: scale(1.02);
