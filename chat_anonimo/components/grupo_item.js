@@ -3,10 +3,10 @@ import React,{useContext } from 'react'
 import { UsuarioContext } from '../context/usuarioContext'
 import Grupo from './grupo'
 
-export default function Grupo_item({nombreGrupo, descGrupo, cambiarGrupo,id}){
-    const { setGrupovista, setIdGrupovista } = useContext(UsuarioContext)
+export default function Grupo_item({nombreGrupo, descGrupo, cambiarGrupo,id, setVistaC}){
+    const {  setIdGrupovista, setVistaGrupo } = useContext(UsuarioContext)
     return (
-        <div onClick={ () =>{ setGrupovista(<Grupo id={id}/>); setIdGrupovista(id) }} className="Grupo">
+        <div onClick={ () =>{ setVistaC(<Grupo id={id}/>); setVistaGrupo(''); setIdGrupovista(id) }} className="Grupo">
 						
             {/* DIV IMAGEN DEL GRUPO*/}
             <div className="div_imagen_grupo">
