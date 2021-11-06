@@ -58,7 +58,7 @@ export async function autenticarUsuario(req, res){
         }
 
         const grupos = await Grupo.find({usuario_id:usuario.id})
-        console.log(grupos)
+        //console.log(grupos)
         //TOKEN
         const payload = {
             usuario: {
