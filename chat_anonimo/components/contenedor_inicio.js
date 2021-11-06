@@ -1,6 +1,7 @@
 import Grupo_item from './grupo_item'
 import React,{ useState, useEffect, useContext } from 'react'
 import { UsuarioContext } from '../context/usuarioContext'
+import { SocketContext } from '../context/socketContext'
 import { io } from "socket.io-client";
 import jwt_decode from "jwt-decode";
 import Formulario_crear_grupo from './formulario_nuevo_grupo'
@@ -8,8 +9,11 @@ import Formulario_crear_grupo from './formulario_nuevo_grupo'
 
 export default function contenedor_inicio() {
 	const { agregarGrupo, grupos, grupovista, setUsuario } = useContext(UsuarioContext)
+	const { setSocket } = useContext(SocketContext)
 
-	useEffect( async () =>{
+	const [vistaCasera, setVistaCasera] = useState('')
+
+	useEffect( () =>{ 
 		let token = localStorage.getItem('token')
 		const {usuario} = jwt_decode(token);
 		const url_info_usuario = process.env.URL_BACKEND + '/usuario/'
@@ -20,23 +24,10 @@ export default function contenedor_inicio() {
 			console.log(socket.id); // x8WIv7-mJelg7on_ALbx
 		  });
 
-		  socket.on("disconnect", () => {
-			console.log(socket.id); // undefined
-		  });
-
-		const respuestaInformacionUsuario = await fetch( url_info_usuario, {
-			body: JSON.stringify({
-			  id_usu: usuario.id
-			}),
-			headers: {
-			  'Content-Type': 'application/json; charset=utf-8'
-			},
-			method: 'POST'
-		  })
-		const informacionUsuario = await respuestaInformacionUsuario.json()
-		setUsuario(informacionUsuario.usuario)
 		
-		const respuestaGruposUsuario = await fetch( url_grupos_usuario, {
+		setSocket(socket)
+
+		fetch( url_info_usuario, {
 			body: JSON.stringify({
 			  id_usu: usuario.id
 			}),
@@ -44,17 +35,30 @@ export default function contenedor_inicio() {
 			  'Content-Type': 'application/json; charset=utf-8'
 			},
 			method: 'POST'
-		  	})
-		const gruposUsuario = await respuestaGruposUsuario.json()
+		  }).then(response => response.json())
+		  .then((response =>  setUsuario(response.usuario)))
+		//const informacionUsuario = await respuestaInformacionUsuario.json()
+		
+		
+		const respuestaGruposUsuario =  fetch( url_grupos_usuario, {
+			body: JSON.stringify({
+			  id_usu: usuario.id
+			}),
+			headers: {
+			  'Content-Type': 'application/json; charset=utf-8'
+			},
+			method: 'POST'
+		  	}).then(response => response.json())
+			  .then(response =>  agregarGrupo(response.grupos))
+		//const gruposUsuario = await respuestaGruposUsuario.json()
 		/* CARGANDO INFORMACIÓN DE LA BASE DE DATOS A LA APLICACIÓN */
 		//LUEGO NO CONSUMIR DESDE EL TOKEN YA QUE SI AGREGA ALGO NUEVO EN EJECUCIÓN NO SE INSERTA AUTOMATICAMENTE AL DOM
 		//USEN CONTEXT CHUPAPIJAS
-		agregarGrupo(gruposUsuario.grupos)
+
 	
 	}, [])
 
-	
-	console.log(grupos)
+
 
 	const [formularioGrupo, setFormularioGrupo] = useState(false)
 	return (
@@ -103,21 +107,25 @@ export default function contenedor_inicio() {
 						{
 							
 							grupos.map( grupo => (
-								<Grupo_item
-								key={grupo._id}
-								id={grupo._id}
-								nombreGrupo={grupo.nombre}
-								descGrupo={grupo.descripcion}
-								/>
+								
+									<Grupo_item
+									key={grupo._id}
+									id={grupo._id}
+									nombreGrupo={grupo.nombre}
+									descGrupo={grupo.descripcion}
+									setVistaC={setVistaCasera}
+									
+									/>
+
 							)) 
 						}
 					</div>
-
+					{ }
 				</div>
 				
 
 				{/* CONTENEDOR DE GRUPO */}
-				{ grupovista }
+				{ vistaCasera }
 			</div>
 
 		</div>

@@ -23,6 +23,11 @@ const io = new Server(server);
 
 io.on("connection", (socket) => {
     console.log(socket.id); // x8WIv7-mJelg7on_ALbx
+
+    socket.on('nuevoComentario', (data) => {
+        console.log(data)
+    })
+
   });
 
 server.listen(port,console.log('Server up'))

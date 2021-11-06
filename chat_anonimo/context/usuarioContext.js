@@ -11,20 +11,23 @@ export const UsuarioProvider = ({children}) => {
 
     const [usuario, setUsuario] = useState([])
     const [grupos,agregarGrupo] = useState([])
-    const [grupovista, setGrupovista] = useState('')
     const [idGrupoVista, setIdGrupovista] = useState('')
+    const [socket_io, setSocket] = useState('')
+    const [vista_grupo, setVistaGrupo] = useState('')
     
-    
+ 
     return (
         <UsuarioContext.Provider value={{
                 grupos,
                 agregarGrupo,
-                grupovista,
-                setGrupovista,
+                vista_grupo,
+                setVistaGrupo,
                 idGrupoVista,
                 setIdGrupovista,
                 usuario,
-                setUsuario
+                setUsuario,
+                socket_io,
+                setSocket
             }}>
             { children }
         </UsuarioContext.Provider>

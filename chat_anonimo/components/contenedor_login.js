@@ -9,7 +9,6 @@ export default function Contenedor_login(){
         const nickname = encodeURIComponent(event.target.nickname.value)
         const password = encodeURIComponent(event.target.password.value)
         const url = process.env.URL_BACKEND + '/usuario/auth'
-		console.log(url)
     
         const res = await fetch( url, {
           body: JSON.stringify({
