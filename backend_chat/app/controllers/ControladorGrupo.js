@@ -1,4 +1,6 @@
 import { Grupo } from '../models/grupo.js';
+import { Comentario } from '../models/comentario.js';
+import { Roles } from '../models/rol.js';
 
 export async function getGrupos(req, res){
     const { id_usu } = req.body
@@ -40,6 +42,21 @@ export async function actualizarGrupo(req, res){
 export async function eliminarGrupo(req, res){
     
 }
+
+export async function nuevo_comentario(req, res){
+    try{
+        const comentario = new Comentario(req.body);
+        await comentario.save();
+
+        const roles = await Roles.find()
+        return res.json({'msg':'success'})
+    }catch(err){
+        console.log(err)
+        return res.json({'msg':'error'})
+    }
+    
+}
+
 
 //RANCIADA ABAJO
 export function getData(req, res){
