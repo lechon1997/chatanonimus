@@ -93,6 +93,30 @@ export async function informacionUsuario(req, res){
     });
 }
 
+export async function ingresarSocket(req, res){
+    try{
+        const {usuario_id, socket_id} = req.body
+        //Usuario.updateOne({_id: usuario_id}, {'$set': {'socket_id':socket}})
+        console.log("Usuario id:" + usuario_id)
+        Usuario.findByIdAndUpdate(usuario_id,{'socket_id':socket_id}, (error, data) => {
+            if(error){
+                return res.json(error)
+            }
+            else{
+                return res.json(data)
+            }
+        })
+        
+        //return res.json({'msg':'success'})
+    }catch(err){
+        console.log(err)
+    }
+    
+
+}
+
+ingresarSocket
+
 //RANCIADA ABAJO
 export function getData(req, res){
     Usuario.find({

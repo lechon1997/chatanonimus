@@ -4,20 +4,36 @@ export default function Crear_comentario({socket, id, id_g}) {
     
     const dataxd = async event => {
         event.preventDefault()
-        
-        
-        socket.emit("nuevoComentario", {
+        const url = process.env.URL_BACKEND + '/grupo/nuevoComentario'
+        const res = await fetch(url, {
+          body: JSON.stringify({
+            
+            usuario_id: id,
+            grupo_id: id_g,
+            asunto: event.target.asunto.value,
+            mensaje: event.target.mensaje.value,
+            anonimo: true
+          }),
+          headers: {
+            'Content-Type': 'application/json; charset=utf-8'
+          },
+          method: 'POST'
+        })
+
+        const { msg } = await res.json()
+        console.log(msg)
+        /*
+          socket.emit("nuevoComentario", {
             usuario_id : id,
             grupo_id: id_g,
             asunto: event.target.asunto.value,
             mensaje: event.target.mensaje.value
-        });
+        })
+        */
+        
         
     }
 
-    
-
-    
       return (
     
             <form onSubmit={dataxd} className="ms-5 mt-1 maximolargoxd">

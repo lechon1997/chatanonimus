@@ -6,6 +6,7 @@ import { Server } from "socket.io";
 import  routerUsuario from "./app/routes/usuario.js";
 import  routerGrupo from "./app/routes/grupo.js";
 import {initDB} from './config/db.js';
+import { Usuario } from './app/models/usuario.js'
 
 dotenv.config()
 const app = express()
@@ -19,16 +20,7 @@ app.use('/grupo',routerGrupo)
 const server = createServer(app)
 const port = process.env.PORT || 4000
 
-const io = new Server(server);
 
-io.on("connection", (socket) => {
-    console.log(socket.id); // x8WIv7-mJelg7on_ALbx
-
-    socket.on('nuevoComentario', (data) => {
-        console.log(data)
-    })
-
-  });
 
 server.listen(port,console.log('Server up'))
 
@@ -39,3 +31,23 @@ try{
 }catch(err){
     console.log(err)
 }
+
+
+const io = new Server(server);
+
+io.on("connection", (socket) => {
+    
+
+    socket.on('guardarSocket', (data) => {
+        
+        Usuario.findByIdAndUpdate(data.usuario_id,{'socket_id':data.id_socket}, (error, data) => {
+            !error ? console.log("Socket actualizado") : console.log("error socket")
+        })
+
+    })
+    
+    socket.on('nuevoComentario', (data) => {
+    //console.log(data.usuarioid)
+    })
+
+  });
