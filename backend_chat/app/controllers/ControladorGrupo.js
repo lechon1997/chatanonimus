@@ -4,8 +4,19 @@ import { Roles } from '../models/rol.js';
 
 export async function getGrupos(req, res){
     const { id_usu } = req.body
-    const grupos = await Grupo.find({"usuario_id":id_usu })
-    return res.json({grupos})
+    console.log("----------------------------------")
+    const grupos = await Roles.find({"usuario_id":id_usu })
+    
+    var datos_grupos = []
+
+    for (const grupo of grupos) {
+        const res = await Grupo.findById(grupo.grupo_id)
+        datos_grupos.push(res)
+      }
+
+      console.log(datos_grupos)
+    //console.log(datos_grupos)
+    return res.json({grupos: datos_grupos})
 
 }
 
@@ -15,7 +26,7 @@ export async function getGrupo(req, res){
 
 export async function crearGrupo(req, res){
     const { nombreGrupo, descripcionGrupo, id_usuario } = req.body;
-    console.log(nombreGrupo+" "+descripcionGrupo+" "+id_usuario+" "+req.file);
+    
     console.log(req.body);
     try{
         const grupo = new Grupo({usuario_id: id_usuario, nombre: nombreGrupo, descripcion: descripcionGrupo});
@@ -24,6 +35,9 @@ export async function crearGrupo(req, res){
             grupo.setImgUrl(filename)
         }
         await grupo.save();
+
+        const rol = new Roles({usuario_id: id_usuario, grupo_id: grupo._id, nombre:'Super administrador', admin:false,superAdmin:true})
+        await rol.save();
         res.send({
             data: "Se ha creado el grupo correctamente",
             grupo
@@ -45,11 +59,16 @@ export async function eliminarGrupo(req, res){
 
 export async function nuevo_comentario(req, res){
     try{
-        const comentario = new Comentario(req.body);
-        await comentario.save();
+        const { usuario_id, grupo_id } = req.body
+        //const comentario = new Comentario(req.body);
+        //await comentario.save();
 
-        const roles = await Roles.find()
-        return res.json({'msg':'success'})
+        const usuarios_del_grupo = await Roles.find({ grupo_id })
+        //console.log(usuarios_del_grupo)
+        return res.json({
+            'msg':'success',
+            'data': usuarios_del_grupo
+        })
     }catch(err){
         console.log(err)
         return res.json({'msg':'error'})

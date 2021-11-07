@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getUsuario, crearUsuario, actualizarUsuario, autenticarUsuario,eliminarUsuario, informacionUsuario} from '../controllers/ControladorUsuario.js';
+import { getUsuario, crearUsuario, actualizarUsuario, autenticarUsuario,eliminarUsuario, informacionUsuario, ingresarSocket} from '../controllers/ControladorUsuario.js';
 
 const routerUsuario = Router()
 
@@ -12,5 +12,6 @@ routerUsuario.post('/',informacionUsuario)
 //routerUsuario.patch('/:id',actualizarUsuario)
 //routerUsuario.delete('/:id',eliminarUsuario)
 routerUsuario.post('/auth',autenticarUsuario)
+routerUsuario.post('/setSocket',ingresarSocket)
 
 export default routerUsuario
