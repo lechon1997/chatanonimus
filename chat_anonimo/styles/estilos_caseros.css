@@ -380,6 +380,10 @@
     max-width: 850px;
 }
 
+.blanco{
+    color: white;
+}
+
 .Grupo:hover{
     cursor: pointer;
     transform: scale(1.02);

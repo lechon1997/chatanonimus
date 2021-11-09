@@ -15,16 +15,16 @@ export default function Formulario_nuevo_grupo({formulario, setFormulario}){
         const token = localStorage.getItem('token')
         const {usuario} = jwt_decode(token);
         
-		const nombreGrupo = encodeURIComponent(event.target.nombre.value);
-		const descripcionGrupo = encodeURIComponent(event.target.descripcion.value);
+		const nombreGrupo = event.target.nombre.value;
+		const descripcionGrupo = event.target.descripcion.value;
         const fileField = document.querySelector('input[type="file"]');
         //const url = process.env.URL_BACKEND + `/grupo/crearGrupo?usuario_id=${usuario.id}&nombreGrupo=${nombreGrupo}&descripcionGrupo=${descripcionGrupo}&fotoGrupo=${fotoGrupo}`
         const url =  process.env.URL_BACKEND + '/grupo/crearGrupo';
 
         const formData  = new FormData();
-        formData.append('id_usuario',usuario.id);
-        formData.append('nombreGrupo',nombreGrupo);
-        formData.append('descripcionGrupo',descripcionGrupo);
+        formData.append('id_usuario', usuario.id);
+        formData.append('nombreGrupo', nombreGrupo);
+        formData.append('descripcionGrupo', descripcionGrupo);
         formData.append('foto', fileField.files[0]);
         const res = await fetch( url, {
           body: formData,

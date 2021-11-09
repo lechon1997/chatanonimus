@@ -5,11 +5,11 @@ export default function Contenedor_reg(){
         
         event.preventDefault()
 
-        const nickname = encodeURIComponent(event.target.nickname.value)
-        const nombre = encodeURIComponent(event.target.nombre.value)
-        const apellido = encodeURIComponent(event.target.apellido.value)
-        const celular = encodeURIComponent(event.target.celular.value)
-        const foto = encodeURIComponent(event.target.foto.value)
+        const nickname = event.target.nickname.value
+        const nombre = event.target.nombre.value
+        const apellido = event.target.apellido.value
+        const celular = event.target.celular.value
+        const foto = event.target.foto.value
         const password = encodeURIComponent(event.target.password.value)
         const url = process.env.URL_BACKEND + "/usuario/crearUsuario"
         const res = await fetch(url, {
