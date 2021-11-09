@@ -22,6 +22,11 @@ export async function getGrupos(req, res){
 
 export async function getGrupo(req, res){
     
+    const { grupo_id } = req.body
+
+    const grupo = await Grupo.findById(grupo_id.id_g)
+    
+    return res.json({info_grupo: grupo})
 }
 
 export async function crearGrupo(req, res){

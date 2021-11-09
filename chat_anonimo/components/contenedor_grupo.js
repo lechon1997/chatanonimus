@@ -67,7 +67,7 @@ export default function Contenedor_grupo(){
                             <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
                         </svg>
                         
-						<a onClick={ () => { setVistaGrupo(Ver_grupo)}} className="link-light w-100" >Ver grupo</a>
+						<a onClick={ () => { setVistaGrupo(<Ver_grupo id_g={idGrupoVista}/>)}} className="link-light w-100" >Ver grupo</a>
                         
                     </div>
 
