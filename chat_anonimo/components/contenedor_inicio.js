@@ -1,78 +1,32 @@
 import Grupo_item from './grupo_item'
-import React,{ useState, useEffect, useContext } from 'react'
+import React,{ useState, useContext } from 'react'
 import { UsuarioContext } from '../context/usuarioContext'
-import { SocketContext } from '../context/socketContext'
 import { io } from "socket.io-client";
-import jwt_decode from "jwt-decode";
 import Formulario_crear_grupo from './formulario_nuevo_grupo'
-
+import { Usuario_Context } from '../Usuario/usuarioProvider'
 
 export default function contenedor_inicio() {
-	const { agregarGrupo, grupos, grupovista, setUsuario } = useContext(UsuarioContext)
-	const { setSocket } = useContext(SocketContext)
+	const [usuarioRancio] = useContext(Usuario_Context)
+	const { inforUsuario } = usuarioRancio;
 
-	const [vistaCasera, setVistaCasera] = useState('')
-
-	useEffect( async () =>{ 
-		let token = localStorage.getItem('token')
-		const {usuario} = jwt_decode(token);
-		const url_info_usuario = process.env.URL_BACKEND + '/usuario/'
-		const url_grupos_usuario = process.env.URL_BACKEND + '/grupo/'
-		const url_set_socket = process.env.URL_BACKEND + '/usuario/setSocket'
-		const socket_frontend = io('http://localhost:4000', { transports : ['websocket'] })
-		
-		
-		  
-		const  res_usuario_nojs = await fetch( url_info_usuario, {
-			body: JSON.stringify({
-			  id_usu: usuario.id
-			}),
-			headers: {
-			  'Content-Type': 'application/json; charset=utf-8'
-			},
-			method: 'POST'
-		  })
-		 const res_usuario_js = await res_usuario_nojs.json()
-		 console.log(res_usuario_js.usuario)
-		 setUsuario(res_usuario_js.usuario)
-		
-		
-		
-		//console.log(socket_frontend.id)
-		
-		//const informacionUsuario = await respuestaInformacionUsuario.json()
-		
-		
-		const res_grupos_nojs = await fetch( url_grupos_usuario, {
-			body: JSON.stringify({
-			  id_usu: usuario.id
-			}),
-			headers: {
-			  'Content-Type': 'application/json; charset=utf-8'
-			},
-			method: 'POST'
-		  	})
-			  
-		const res_grupos_js = await res_grupos_nojs.json() 
-		agregarGrupo(res_grupos_js.grupos)
-		
-		//const gruposUsuario = await respuestaGruposUsuario.json()
-		/* CARGANDO INFORMACIÓN DE LA BASE DE DATOS A LA APLICACIÓN */
-		//LUEGO NO CONSUMIR DESDE EL TOKEN YA QUE SI AGREGA ALGO NUEVO EN EJECUCIÓN NO SE INSERTA AUTOMATICAMENTE AL DOM
-		//USEN CONTEXT CHUPAPIJAS
-
-		socket_frontend.on("connection",{});
-		
-		socket_frontend.emit("guardarSocket", {
-            usuario_id : usuario.id,
-			id_socket: socket_frontend.id
-        })
-	}, [])
-
-
-
-
+	const { grupos, grupovista} = useContext(UsuarioContext)
 	const [formularioGrupo, setFormularioGrupo] = useState(false)
+	const [vistaCasera, setVistaCasera] = useState('')
+	const socket_frontend = io('http://localhost:4000', { transports : ['websocket'] })
+
+
+	socket_frontend.on("connection",{});
+			
+	socket_frontend.emit("guardarSocket", {
+		usuario_id : inforUsuario._id,
+		id_socket: socket_frontend.id
+	})
+
+	socket_frontend.on("msg_recibido",(data) => {
+		console.log("Información socket:", data)
+	})
+
+	
 	return (
 		
 		<div className="contenedor_inicio">
@@ -117,20 +71,24 @@ export default function contenedor_inicio() {
 						{/* Grupo 1 a manopla*/}
 
 						{
-							
-							grupos.map( grupo => (
+							/*
+							 console.log(inforUsuario.grupos)
+								*/
+													
+						inforUsuario.grupos.map( grupo => (
 								
-									<Grupo_item
-									key={grupo._id}
-									id={grupo._id}
-									nombreGrupo={grupo.nombre}
-									descGrupo={grupo.descripcion}
-									setVistaC={setVistaCasera}
-									
-									/>
+								<Grupo_item
+								key={grupo._id}
+								id={grupo._id}
+								nombreGrupo={grupo.nombre}
+								descGrupo={grupo.descripcion}
+								setVistaC={setVistaCasera}
+								
+								/>
 
-							)) 
+						)) 
 						}
+						
 					</div>
 					{ }
 				</div>
@@ -143,4 +101,5 @@ export default function contenedor_inicio() {
 		</div>
 		
 	)
+	
 }

@@ -1,17 +1,17 @@
-import Contenedor_inicio from '../../components/contenedor_inicio'
-import { UsuarioProvider } from '../../context/usuarioContext'
-import { SocketProvider } from '../../context/socketContext'
-
+import Ranciada2 from '../../components/ranciada2'
+import { UsuarioProvider} from '../../context/usuarioContext'
+import Usuario_Provider from '../../Usuario/usuarioProvider'
 
 export default function dashbor() {
+	
 	return (
-		<UsuarioProvider>
-			<SocketProvider>
-			<div className="inicioxd">
-				<Contenedor_inicio/>
-			</div>
-			</SocketProvider>
-		</UsuarioProvider>
+		<Usuario_Provider>
+			<UsuarioProvider>
+				<div className="inicioxd">
+					<Ranciada2/>
+				</div>
+			</UsuarioProvider>
+		</Usuario_Provider>
 		
 	)
 }

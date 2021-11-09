@@ -3,16 +3,12 @@ import Comentarios_leidos from './comentarios_leidos'
 import Ver_grupo from './ver_grupo'
 import Agregar_miembros from './Agregar_miembros'
 import Crear_comentario from './crear_comentario'
-import { useState, useEffect, useContext } from 'react'
+import { useContext } from 'react'
 import { UsuarioContext } from '../context/usuarioContext'
-import { SocketContext } from '../context/socketContext';
 
 export default function Contenedor_grupo(){
 	const { vista_grupo, setVistaGrupo } = useContext(UsuarioContext)
-
-	const { socket_io } = useContext(SocketContext)
     const { usuario, idGrupoVista} = useContext(UsuarioContext)
- 
 	
     return (
 
@@ -28,7 +24,7 @@ export default function Contenedor_grupo(){
 						</svg>
                            {/*  <a onClick={ () => { cambiarVista(Crear_comentario)}} className="link-light w-100" >Crear comentario</a> */}
                            
-						   <a onClick={ () => { setVistaGrupo(<Crear_comentario socket={socket_io} id= {usuario._id} id_g={idGrupoVista}/>)}} className="link-light w-100" >Crear comentario</a>
+						   <a onClick={ () => { setVistaGrupo(<Crear_comentario id= {usuario._id} id_g={idGrupoVista}/>)}} className="link-light w-100" >Crear comentario</a>
                           
                     </div>
 

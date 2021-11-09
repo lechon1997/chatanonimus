@@ -39,7 +39,7 @@ io.on("connection", (socket) => {
     
 
     socket.on('guardarSocket', (data) => {
-        
+        console.log(data.id_socket)
         Usuario.findByIdAndUpdate(data.usuario_id,{'socket_id':data.id_socket}, (error, data) => {
             !error ? console.log("Socket actualizado") : console.log("error socket")
         })
@@ -47,7 +47,19 @@ io.on("connection", (socket) => {
     })
     
     socket.on('nuevoComentario', (data) => {
-    //console.log(data.usuarioid)
+        console.log(data.usuarioid)
+    })
+
+    socket.on('msg_frontend_to_backend', async (data) => {
+        console.log(":v")
+            for(const u of data.usuarios){
+                //console.log(u)
+                const socketid_usuario = await Usuario.findById(u.usuario_id,'socket_id')
+                socket.to(socketid_usuario).emit("msg_recibido", socket.id, {
+                    mensaje:'hola :v'
+                });
+    
+            }
     })
 
   });

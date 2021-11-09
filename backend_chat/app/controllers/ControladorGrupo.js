@@ -4,9 +4,7 @@ import { Roles } from '../models/rol.js';
 
 export async function getGrupos(req, res){
     const { id_usu } = req.body
-    console.log("----------------------------------")
     const grupos = await Roles.find({"usuario_id":id_usu })
-    
     var datos_grupos = []
 
     for (const grupo of grupos) {
@@ -14,8 +12,7 @@ export async function getGrupos(req, res){
         datos_grupos.push(res)
       }
 
-      console.log(datos_grupos)
-    //console.log(datos_grupos)
+    
     return res.json({grupos: datos_grupos})
 
 }

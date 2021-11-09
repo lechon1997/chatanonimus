@@ -3,8 +3,11 @@ import { UsuarioContext } from '../context/usuarioContext'
 
 export default function Cabecera_grupo(){
     
-    const { idGrupoVista, grupos } = useContext(UsuarioContext)
-    const grupo = grupos.find( grupo => grupo._id === idGrupoVista )
+    const [usuarioRancio] = useContext(Usuario_Context)
+	const { inforUsuario } = usuarioRancio;
+
+    const { idGrupoVista } = useContext(UsuarioContext)
+    const grupo = inforUsuario.grupos.find( grupo => grupo._id === idGrupoVista )
     
     return (
         <div className="cabecera_div_mensajes">
