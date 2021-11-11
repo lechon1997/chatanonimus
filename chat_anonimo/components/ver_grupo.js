@@ -19,7 +19,7 @@ export default function ver_miembros(id_g){
         const json =  await res.json()
         setgrupoinfo(json.info_grupo)
         //console.log(json.info_grupo) 
-    })
+    },[])
 
     return (
         <div style={{ color: 'white' }} >

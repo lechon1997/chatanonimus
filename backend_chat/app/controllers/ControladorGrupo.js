@@ -106,7 +106,8 @@ export async function agregarMiembro(req, res){
                 await rol_rancio.save();
 
                 //Creo la invitación
-                const invitacion = new Invitacion({id_usuario_solicitante: usuario_id, id_usuario_solicitado: usuarioSolicitado.id, id_rol: rol_rancio.id, aceptado: false})
+                const invitacion = new Invitacion({id_usuario_solicitante: usuario_id, id_usuario_solicitado: usuarioSolicitado.id, id_rol: rol_rancio.id,
+                    aceptado: false, id_grupo: grupo_id})
                 await invitacion.save();
 
                 //Y si la invitación fue creada con éxito ahí si, envió el mensaje.

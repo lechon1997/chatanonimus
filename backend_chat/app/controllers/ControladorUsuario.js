@@ -53,9 +53,9 @@ export async function verInvitaciones(req, res){
                     if(id_usuario == invitacion.id_usuario_solicitado){
                         //Retorno solamente las invitaciones que no aceptó el pibardo
                         if(invitacion.aceptado == false){
-                            const grupoInvi = await Grupo.findOne({usuario_id: invitacion.id_usuario_solicitante})
-                            const usuInvi = await Usuario.findById({'_id': invitacion.id_usuario_solicitante})
-                            
+                            const usuInvi = await Usuario.findById({'_id': invitacion.id_usuario_solicitante})                          
+                            const grupoInvi = await Grupo.findById({'_id': invitacion.id_grupo})
+
                             //Info a retornar
                             const idInvitacion = invitacion._id
                             const nombreGrupo = grupoInvi.nombre
@@ -81,9 +81,9 @@ export async function verInvitaciones(req, res){
 }
 
 export async function aceptarInvitacion(req, res){
-    try{
-        const {id_invitacion, estado} = req.body      
-        if(estado == true){
+    
+        const {id_invitacion, estado} = req.body          
+        if(estado){
             //En caso de que el tipo acepte, tengo que cambiar el estado de la invi.           
             Invitacion.findByIdAndUpdate(id_invitacion, {'aceptado': true}, (error, data) => {
                 if(error){
@@ -116,10 +116,7 @@ export async function aceptarInvitacion(req, res){
             });
             return res.json({'msg': 'Se rechazó correctamente'})
         }       
-    }catch(err){
-        console.log(err)
-        return res.json(err)
-    }
+  
 }
 
 export async function actualizarUsuario(req, res){

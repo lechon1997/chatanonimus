@@ -22,7 +22,7 @@ export default function Formulario_nuevo_grupo({formulario, setFormulario}){
         const json =  await res.json()
         setSolicitudesInfo(json.retorno)
         //console.log(json.info_grupo) 
-    })
+    },[])
 
 
     return (
@@ -30,7 +30,7 @@ export default function Formulario_nuevo_grupo({formulario, setFormulario}){
             <div className="purple_bien_de_macho">
                 <p>Solicitudes de grupo</p>
             </div>
-			<div>               
+			<div className="div_invitaciones">               
 				{							
 					solicitudesInfo.map( invi_info => (
 						<Invitacion_item
