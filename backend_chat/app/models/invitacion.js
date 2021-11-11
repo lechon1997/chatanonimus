@@ -11,6 +11,10 @@ const InvitacionSchema = new mongoose.Schema({
     id_rol:{
         type: String,
         required: true
+    },
+    aceptado:{
+        type: Boolean,
+        required: true
     }
 },{
     versionKey:false,

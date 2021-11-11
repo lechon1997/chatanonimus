@@ -13,10 +13,28 @@ export async function getGrupos(req, res){
 
     for (const grupo of grupos) {
         const res = await Grupo.findById(grupo.grupo_id)
-        datos_grupos.push(res)
-      }
+        const usuario_creador = res.usuario_id
 
-      console.log(datos_grupos)
+        //Si el usuario creó al grupo lo agrego
+        if(usuario_creador == id_usu){
+            datos_grupos.push(res)
+        }    
+    }
+            
+    //Si aceptó la solicitud ahí también hay que agregarlo
+    const invitaciones = await Invitacion.find({ id_usuario_solicitado: id_usu})
+    if(invitaciones){
+        for (const invitacion of invitaciones) {
+            if(id_usu == invitacion.id_usuario_solicitado){
+                if(invitacion.aceptado == true){
+                    const grupoInvi = await Grupo.findOne({usuario_id: invitacion.id_usuario_solicitante})
+                    datos_grupos.push(grupoInvi)
+                }
+            }
+        }
+    }
+
+    console.log(datos_grupos)
     //console.log(datos_grupos)
     return res.json({grupos: datos_grupos})
 
@@ -66,13 +84,8 @@ export async function agregarMiembro(req, res){
         if(!usuarioSolicitado){
             return res.json({'msg': 'El usuario no existe'})       
         }else{           
-            //Me fijo si no me invité a mi mismo-------------------------//
-            let usuarioInvitadoSoyYo = await Roles.findOne(
-                { usuario_id: usuario_id,
-                grupo_id: grupo_id }
-            )
-
-            if(usuarioInvitadoSoyYo){
+            //Me fijo si no me invité a mi mismo-------------------------//            
+            if(usuarioSolicitado._id == usuario_id){
                 return res.json({'msg': 'Te estás invitando a vos mismo bananín'})
             }
             //-------------------------------------------------------------------//
@@ -93,7 +106,7 @@ export async function agregarMiembro(req, res){
                 await rol_rancio.save();
 
                 //Creo la invitación
-                const invitacion = new Invitacion({id_usuario_solicitante: usuario_id, id_usuario_solicitado: usuarioSolicitado.id, id_rol: rol_rancio.id})
+                const invitacion = new Invitacion({id_usuario_solicitante: usuario_id, id_usuario_solicitado: usuarioSolicitado.id, id_rol: rol_rancio.id, aceptado: false})
                 await invitacion.save();
 
                 //Y si la invitación fue creada con éxito ahí si, envió el mensaje.
