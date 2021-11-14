@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getUsuario, crearUsuario, actualizarUsuario, autenticarUsuario,eliminarUsuario, informacionUsuario, ingresarSocket} from '../controllers/ControladorUsuario.js';
+import { getUsuario, crearUsuario, actualizarUsuario, autenticarUsuario,eliminarUsuario, informacionUsuario, ingresarSocket, verInvitaciones, aceptarInvitacion} from '../controllers/ControladorUsuario.js';
 
 const routerUsuario = Router()
 
@@ -13,5 +13,7 @@ routerUsuario.post('/',informacionUsuario)
 //routerUsuario.delete('/:id',eliminarUsuario)
 routerUsuario.post('/auth',autenticarUsuario)
 routerUsuario.post('/setSocket',ingresarSocket)
+routerUsuario.post('/verInvitaciones', verInvitaciones)
+routerUsuario.post('/aceptarInvitacion', aceptarInvitacion)
 
 export default routerUsuario

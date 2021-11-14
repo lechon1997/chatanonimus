@@ -1,5 +1,7 @@
 import { Usuario } from '../models/usuario.js'; 
 import { Grupo } from '../models/grupo.js';
+import { Invitacion } from '../models/invitacion.js';
+import { Roles } from '../models/rol.js';
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken'
@@ -30,6 +32,91 @@ export async function crearUsuario(req, res){
         res.send({'msg':err})
     }
     
+}
+
+export async function verInvitaciones(req, res){  
+    const retorno = []
+    try{
+        const { id_usuario } = req.body;  
+        let usuario = await Usuario.findById({'_id': id_usuario})
+        if(usuario){
+            //Ahora hay que ver las invitaciones que tiene el usuario loggeado xd
+            //Entonces voy a Invitaciones mmm
+            let invitaciones = await Invitacion.find({ id_usuario_solicitado: id_usuario})
+            if(!invitaciones){
+                console.log("no hay invitaciones xd")
+                return res.json({'msg': "No tenés invitaciones pa"})
+            }else{
+                //Si tiene invitaciones es porque tengo que retornarlas mmmmm
+                for (const invitacion of invitaciones) {
+                    //Si los id son iguales es porque el usuario loggeado es al que lo invitaron mmm
+                    if(id_usuario == invitacion.id_usuario_solicitado){
+                        //Retorno solamente las invitaciones que no aceptó el pibardo
+                        if(invitacion.aceptado == false){
+                            const usuInvi = await Usuario.findById({'_id': invitacion.id_usuario_solicitante})                          
+                            const grupoInvi = await Grupo.findById({'_id': invitacion.id_grupo})
+
+                            //Info a retornar
+                            const idInvitacion = invitacion._id
+                            const nombreGrupo = grupoInvi.nombre
+                            const nicknameUsuario = usuInvi.nickname
+                            const nombreUsuario = usuInvi.nombre
+                            const apellidoUsuario = usuInvi.apellido
+
+                            retorno.push({idInvitacion, nombreGrupo, nicknameUsuario, nombreUsuario, apellidoUsuario})     
+                        }
+                    }
+                }
+                return res.json({
+                    'retorno': retorno
+                })
+            }
+        }else{
+            return res.json({'msg': "Ha ocurrido un error inesperado"})
+        }
+    }catch(err){
+        console.log(err)
+        return res.json({'msg':err})
+    }
+}
+
+export async function aceptarInvitacion(req, res){
+    
+        const {id_invitacion, estado} = req.body          
+        if(estado){
+            //En caso de que el tipo acepte, tengo que cambiar el estado de la invi.           
+            Invitacion.findByIdAndUpdate(id_invitacion, {'aceptado': true}, (error, data) => {
+                if(error){
+                    return res.json(error)
+                }else{
+                    return res.json(data)
+                }
+            })                         
+        }else{
+            //En caso de que el tipo la rechace, borro la invi y el rol.
+            const invitacion = await Invitacion.findById({'_id': id_invitacion})
+            const id_rol = invitacion.id_rol
+
+            Invitacion.findByIdAndRemove(id_invitacion, function (err, docs) {
+                if (err){
+                    console.log(err)
+                }
+                else{
+                    console.log("Removed invitacion : ", docs);
+                }
+            });
+
+            Roles.findByIdAndRemove(id_rol, function (err, docs) {
+                if (err){
+                    console.log(err)
+                }
+                else{
+                    console.log("Removed rol : ", docs);
+                }
+            });
+            return res.json({'msg': 'Se rechazó correctamente'})
+        }       
+  
 }
 
 export async function actualizarUsuario(req, res){

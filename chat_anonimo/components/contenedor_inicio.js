@@ -4,12 +4,15 @@ import { UsuarioContext } from '../context/usuarioContext'
 import { io } from "socket.io-client";
 import Formulario_crear_grupo from './formulario_nuevo_grupo'
 import { Usuario_Context } from '../Usuario/usuarioProvider'
+import Formulario_ver_solicitud from './formulario_ver_invitaciones'
+
 
 export default function contenedor_inicio() {
 	const [usuarioRancio] = useContext(Usuario_Context)
 	const { inforUsuario } = usuarioRancio;
 	const { grupos, grupovista} = useContext(UsuarioContext)
 	const [formularioGrupo, setFormularioGrupo] = useState(false)
+	const [formularioSolicitud, setFormularioSolicitud] = useState(false)
 	const [vistaCasera, setVistaCasera] = useState('')
 
 	const socket_frontend = io('http://localhost:4000', { transports : ['websocket'] })
@@ -25,6 +28,7 @@ export default function contenedor_inicio() {
 		console.log("Información socket:", data)
 	})
 
+	
 	
 	return (
 		
@@ -53,12 +57,17 @@ export default function contenedor_inicio() {
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-bell-fill" viewBox="0 0 16 16">
   								<path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
 							</svg>
-							<a>Solicitudes</a>
+							<a onClick={ () => { setFormularioSolicitud(formularioSolicitud => !formularioSolicitud)}}> Solicitudes</a>
 						</div>
 					</div>
 					{/* FORMULARIO CREAR GRUPO */}
 					{
 						formularioGrupo === true ? <Formulario_crear_grupo formulario={formularioGrupo} setFormulario={setFormularioGrupo}/> : '' 
+
+					}
+					{/* FORMULARIO SOLICITUDES */}
+					{
+						formularioSolicitud === true ? <Formulario_ver_solicitud formulario={formularioSolicitud} setFormulario={setFormularioSolicitud}/> : '' 
 
 					}
 					<div>
