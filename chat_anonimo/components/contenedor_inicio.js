@@ -111,7 +111,11 @@ export default function contenedor_inicio() {
 					<div>
 
 					</div>
-				
+					<div>
+
+						<a onClick={ () => { setFormularioGrupo(formularioGrupo => !formularioGrupo)}}>Ver perfil</a>
+
+					</div>
 					{/* CONTENEDOR DE LISTA GRUPOS */}
 					<div className="div_grupos">
 						{/* Grupo 1 a manopla*/}

@@ -32,4 +32,8 @@ const UsuarioSchema = new mongoose.Schema({
     timestamps:true
 })
 
+UsuarioSchema.methods.setImgUrl = function setImgUrl(filename){
+    this.foto = filename;
+}
+
 export const Usuario = mongoose.model('usuarios', UsuarioSchema)

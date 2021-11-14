@@ -9,26 +9,44 @@ export default function Contenedor_reg(){
         const nombre = event.target.nombre.value
         const apellido = event.target.apellido.value
         const celular = event.target.celular.value
-        const foto = event.target.foto.value
         const password = encodeURIComponent(event.target.password.value)
+        const confpassword = encodeURIComponent(event.target.confpassword.value)
+        const fileField = document.querySelector('input[type="file"]');
         const url = process.env.URL_BACKEND + "/usuario/crearUsuario"
-        const res = await fetch(url, {
-            body: JSON.stringify({
-                nickname ,
-                nombre,
-                apellido,
-                celular,
-                foto,
-                password
-              }),
-            headers: {
-                'Content-Type': 'application/json; charset=utf-8'
-              },
-            method: 'POST'
-        })
-    
-        const result = await res.json()
-        console.log(result)
+
+        if(password != confpassword){
+
+            window.alert("Las contraseñas no coinciden!");
+
+        }else{
+
+            const formData  = new FormData();
+            formData.append('nickname', nickname);
+            formData.append('nombre', nombre);
+            formData.append('apellido', apellido);
+            formData.append('celular', celular);
+            formData.append('password', password);
+            formData.append('foto', fileField.files[0]);
+
+            const res = await fetch(url, {
+              body: formData,
+              method: 'POST'
+            })
+        
+            const result = await res.json()
+
+            if(result.msg == "success"){
+                localStorage.clear()                
+                const url = process.env.URL_FRONTEND
+                //localStorage.setItem('token', msg)
+                window.alert("Usuario creado correctamente! Logeate!");
+                window.location.href = url
+            }else if(result.msg == "El usuario ya existe"){
+                window.alert("El usuario ya existe!");
+            }
+            console.log(result)
+        }
+
       }
 
     return (
@@ -50,7 +68,8 @@ export default function Contenedor_reg(){
                 <input  className="w-100 px-2 h-40px rounded border-secondary" name="celular" type="text" placeholder="celular"/>
             </div>
             <div className="mx-1 mb-2 ">
-                <input  className="w-100 px-2 h-40px rounded border-secondary" name="foto" type="text" placeholder="foto"/>
+            <label>foto:  </label>
+                <input className="" type="file" name="file"/>
             </div>
 
             <div className="mx-1 mb-4">
