@@ -14,12 +14,21 @@ export default function Contenedor_reg(){
         const fileField = document.querySelector('input[type="file"]');
         const url = process.env.URL_BACKEND + "/usuario/crearUsuario"
 
-        if(password != confpassword){
-
-            window.alert("Las contraseñas no coinciden!");
-
+        if(nickname == ""){
+            document.getElementById('error').innerHTML = 'Debe ingresar un nickname.';
+        }else if(nombre == ""){
+            document.getElementById('error').innerHTML = 'Debe ingresar su nombre.';
+        }else if(apellido == ""){
+            document.getElementById('error').innerHTML = 'Debe ingresar su apellido.';
+        }else if(celular == ""){
+            document.getElementById('error').innerHTML = 'Debe ingresar un celular.';
+        }else if(password == ""){
+            document.getElementById('error').innerHTML = 'Debe ingresar una contraseña.';
+        }else if(confpassword == ""){
+            document.getElementById('error').innerHTML = 'Debe confirmar su contraseña.';
+        }else if(password != confpassword){
+            document.getElementById('error').innerHTML = 'Las contraseñas no coinciden!';
         }else{
-
             const formData  = new FormData();
             formData.append('nickname', nickname);
             formData.append('nombre', nombre);
@@ -42,7 +51,7 @@ export default function Contenedor_reg(){
                 window.alert("Usuario creado correctamente! Logeate!");
                 window.location.href = url
             }else if(result.msg == "El usuario ya existe"){
-                window.alert("El usuario ya existe!");
+                document.getElementById('error').innerHTML = 'El usuario ya existe!';
             }
             console.log(result)
         }
@@ -78,6 +87,10 @@ export default function Contenedor_reg(){
             <div className="mx-1 mb-4">
                 <input className="w-100 px-2 h-40px rounded border-secondary" name="confpassword" type="password" placeholder="Confirmar contraseña"/>
             </div>
+            <div className="mx-1 mb-2 " style={{ color: 'red' }}>
+                <label id="error"></label>
+            </div>
+
             <div className="d-flex">
             <div className="mx-1">
             <input className="w-100 h-40px btn btn-primary" type="submit" value="Confirmar"/>
