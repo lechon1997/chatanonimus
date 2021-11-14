@@ -1,15 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { UsuarioContext } from '../context/usuarioContext'
 import Invitacion_item from './invitacion_item'
 import { Usuario_Context } from '../Usuario/usuarioProvider'
 
 export default function Formulario_nuevo_grupo({formulario, setFormulario}){
     const [solicitudesInfo, setSolicitudesInfo] = useState([]);
     const [usuarioRancio] = useContext(Usuario_Context)
-	const { inforUsuario } = usuarioRancio;
-  console.log(inforUsuario)
-    const {usuario} = useContext(UsuarioContext)
-    
+	const { inforUsuario } = usuarioRancio; 
 
     useEffect( async () =>{ 
         //event.preventDefault()
@@ -35,21 +31,20 @@ export default function Formulario_nuevo_grupo({formulario, setFormulario}){
             <div className="purple_bien_de_macho">
                 <p>Solicitudes de grupo</p>
             </div>
-			<div className="div_invitaciones">               
-				{							
-					solicitudesInfo.map( invi_info => (
-						<Invitacion_item
-							key={invi_info.idInvitacion}
-							idInvitacion={invi_info.idInvitacion}
-							nombreGrupo={invi_info.nombreGrupo}
-							nicknameUsuario={invi_info.nicknameUsuario}
-							nombreUsuario={invi_info.nombreUsuario}
-							apellidoUsuario={invi_info.apellidoUsuario}
-						/>
-					)) 
-				}
-			</div>
-        
+            <div className="div_invitaciones">               
+              {							
+                solicitudesInfo.map( invi_info => (
+                  <Invitacion_item
+                    key={invi_info.idInvitacion}
+                    idInvitacion={invi_info.idInvitacion}
+                    nombreGrupo={invi_info.nombreGrupo}
+                    nicknameUsuario={invi_info.nicknameUsuario}
+                    nombreUsuario={invi_info.nombreUsuario}
+                    apellidoUsuario={invi_info.apellidoUsuario}
+                  />
+                )) 
+              }
+            </div>      
         </form>       
     )
 
