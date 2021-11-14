@@ -1,7 +1,8 @@
 import {useContext } from 'react';
-
-export default function Crear_comentario({socket, id, id_g}) {
-    
+import { io } from "socket.io-client";
+export default function Crear_comentario({id, id_g, socket}) {
+  
+  console.log("xddd")
     const dataxd = async event => {
         event.preventDefault()
         const url = process.env.URL_BACKEND + '/grupo/nuevoComentario'
@@ -20,16 +21,38 @@ export default function Crear_comentario({socket, id, id_g}) {
           method: 'POST'
         })
 
-        const { msg } = await res.json()
-        console.log(msg)
-        /*
-          socket.emit("nuevoComentario", {
-            usuario_id : id,
-            grupo_id: id_g,
-            asunto: event.target.asunto.value,
-            mensaje: event.target.mensaje.value
-        })
-        */
+        const { msg, data } = await res.json()
+		console.log(msg)
+    
+		
+		if(msg === 'success') {
+			
+			socket.emit("msg_frontend_to_backend", {
+				usuario_id: id,
+				grupo_id: id_g,
+				asunto: event.target.asunto.value,
+				mensaje: event.target.mensaje.value,
+				anonimo: true,
+				usuarios: data
+			})
+		}
+
+    socket.on("recibir_msg", (respuesta) =>{
+        console.log("respuesta servidor: ", respuesta)
+    })
+
+
+		socket.on("msg_recibido", (datos) => {
+			 console.log(datos)});
+		
+
+        
+        
+      
+        //console.log(data)
+        
+          
+        
         
         
     }

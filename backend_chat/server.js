@@ -35,11 +35,11 @@ try{
 
 const io = new Server(server);
 
-io.on("connection", (socket) => {
-    
+io.on("connection",  (socket) => {
+    console.log(socket.id)
 
-    socket.on('guardarSocket', (data) => {
-        
+    socket.on('guardarSocket',  (data) => {
+        console.log(data)
         Usuario.findByIdAndUpdate(data.usuario_id,{'socket_id':data.id_socket}, (error, data) => {
             !error ? console.log("Socket actualizado") : console.log("error socket")
         })
@@ -47,7 +47,19 @@ io.on("connection", (socket) => {
     })
     
     socket.on('nuevoComentario', (data) => {
-    //console.log(data.usuarioid)
+        console.log(data.usuarioid)
+    })
+
+    socket.on('msg_frontend_to_backend', (data) => {
+            //console.log(data)
+            for(const u of data.usuarios){
+                
+                //const socketid_usuario = await Usuario.findById(u.usuario_id,'socket_id')
+                socket.broadcast.emit("recibir_msg", {
+                    mensaje:'hola :v'
+                });
+    
+            }
     })
 
   });
