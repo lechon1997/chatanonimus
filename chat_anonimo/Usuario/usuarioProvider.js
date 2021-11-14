@@ -5,6 +5,7 @@ const Usuario_Context = createContext();
 
 const Usuario_Provider = ({children}) => {
     const [usuarioRancio, dispatch] = useReducer(usuarioReducer, initialUsuario);
+    
     return (
         <Usuario_Context.Provider
             value ={ [usuarioRancio, dispatch] } 

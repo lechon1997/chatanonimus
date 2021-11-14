@@ -1,5 +1,5 @@
-export default function agregar_miembros({socket, id, id_g}){
-
+export default function agregar_miembros({id, id_g}){
+    
     const crearInvitacion = async event => {
         event.preventDefault()
         const url = process.env.URL_BACKEND + '/grupo/agregarMiembro' 
@@ -29,7 +29,7 @@ export default function agregar_miembros({socket, id, id_g}){
                 <br></br>
                 <input type="text" className="form-control w-50 bg-light" name="rol" placeholder="Rol de usuario en grupo"/>
                 <br></br>
-                <label className="blanco"><input type="checkbox" id="cbox1" name = "esadmin" value="first_checkbox"/> ¿Es admin?</label>
+                <label className="blanco"><input type="checkbox" id="cbox1" name = "esadmin" value="first_checkbox"/> Administrador</label>
             </div>
             <div className="mt-3 maximolargoxd">
                 <div className="w-50 d-flex flex-row-reverse bd-highlight ">

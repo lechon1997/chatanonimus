@@ -8,12 +8,11 @@ import { Usuario_Context } from '../Usuario/usuarioProvider'
 export default function contenedor_inicio() {
 	const [usuarioRancio] = useContext(Usuario_Context)
 	const { inforUsuario } = usuarioRancio;
-
 	const { grupos, grupovista} = useContext(UsuarioContext)
 	const [formularioGrupo, setFormularioGrupo] = useState(false)
 	const [vistaCasera, setVistaCasera] = useState('')
-	const socket_frontend = io('http://localhost:4000', { transports : ['websocket'] })
 
+	const socket_frontend = io('http://localhost:4000', { transports : ['websocket'] })
 
 	socket_frontend.on("connection",{});
 			

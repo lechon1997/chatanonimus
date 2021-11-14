@@ -9,9 +9,9 @@ export default function Ranciada2(){
     const [usuarioRancio, dispatch] = useContext(Usuario_Context)
     const { inforUsuario } = usuarioRancio; 
     
-
     const url_info_usuario = process.env.URL_BACKEND + '/usuario/'
     const url_grupos_usuario = process.env.URL_BACKEND + '/grupo/'
+	
 	
 	useEffect(async () => {
 		let token = localStorage.getItem('token')

@@ -1,7 +1,8 @@
 import {useContext } from 'react';
 import { io } from "socket.io-client";
-export default function Crear_comentario({id, id_g}) {
-    
+export default function Crear_comentario({id, id_g, socket}) {
+  
+  console.log("xddd")
     const dataxd = async event => {
         event.preventDefault()
         const url = process.env.URL_BACKEND + '/grupo/nuevoComentario'
@@ -21,9 +22,8 @@ export default function Crear_comentario({id, id_g}) {
         })
 
         const { msg, data } = await res.json()
-		
-		const socket = io('http://localhost:4000', { transports : ['websocket'] })
-		socket.on("connection",{});
+		console.log(msg)
+    
 		
 		if(msg === 'success') {
 			
@@ -36,6 +36,10 @@ export default function Crear_comentario({id, id_g}) {
 				usuarios: data
 			})
 		}
+
+    socket.on("recibir_msg", (respuesta) =>{
+        console.log("respuesta servidor: ", respuesta)
+    })
 
 
 		socket.on("msg_recibido", (datos) => {

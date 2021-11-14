@@ -35,11 +35,11 @@ try{
 
 const io = new Server(server);
 
-io.on("connection", (socket) => {
-    
+io.on("connection",  (socket) => {
+    console.log(socket.id)
 
-    socket.on('guardarSocket', (data) => {
-        console.log(data.id_socket)
+    socket.on('guardarSocket',  (data) => {
+        console.log(data)
         Usuario.findByIdAndUpdate(data.usuario_id,{'socket_id':data.id_socket}, (error, data) => {
             !error ? console.log("Socket actualizado") : console.log("error socket")
         })
@@ -50,12 +50,12 @@ io.on("connection", (socket) => {
         console.log(data.usuarioid)
     })
 
-    socket.on('msg_frontend_to_backend', async (data) => {
-        console.log(":v")
+    socket.on('msg_frontend_to_backend', (data) => {
+            //console.log(data)
             for(const u of data.usuarios){
-                //console.log(u)
-                const socketid_usuario = await Usuario.findById(u.usuario_id,'socket_id')
-                socket.to(socketid_usuario).emit("msg_recibido", socket.id, {
+                
+                //const socketid_usuario = await Usuario.findById(u.usuario_id,'socket_id')
+                socket.broadcast.emit("recibir_msg", {
                     mensaje:'hola :v'
                 });
     

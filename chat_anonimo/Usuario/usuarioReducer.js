@@ -5,7 +5,8 @@ const types = {
 const initialUsuario = {
     inforUsuario : { 
         user: {},
-        grupos: []
+        grupos: [],
+        primeraVez: true
     }
     
 }
