@@ -39,12 +39,32 @@ export async function getGrupos(req, res){
 }
 
 export async function getGrupo(req, res){
+    const { grupo_id } = req.body;
     
-    const { grupo_id } = req.body
+    try{
 
-    const grupo = await Grupo.findById(grupo_id.id_g)
-    
-    return res.json({info_grupo: grupo})
+        const grupo = await Grupo.findById(grupo_id.id_g)
+        let miembros = await Roles.find({grupo_id: grupo_id.id_g })
+        
+        let datos_miembros = []
+        for (const miembro of miembros) {
+            const usu = await Usuario.findById(miembro.usuario_id)
+
+            const datos = []
+            if(miembro.admin == true){
+                datos.push({nickname: usu.nickname, rol: miembro.nombre, admin: "Administrador"})
+            }else{
+                datos.push({nickname: usu.nickname, rol: miembro.nombre, admin: ""})
+            }
+            
+            datos_miembros.push(datos)
+
+        }
+        return res.json({info_grupo: grupo, miembros: datos_miembros})
+
+    }catch(err){
+        return res.json({'msg':err});
+    }
 }
 
 export async function crearGrupo(req, res){
