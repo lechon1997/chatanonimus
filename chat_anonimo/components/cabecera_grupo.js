@@ -1,15 +1,8 @@
-import React,{useContext } from 'react'
-import { UsuarioContext } from '../context/usuarioContext'
-import { Usuario_Context } from '../Usuario/usuarioProvider'
 
 
-export default function Cabecera_grupo(){
+export default function Cabecera_grupo({ Grupo, ComentariosNuevos }){
     
-    const [usuarioRancio] = useContext(Usuario_Context)
-	const { inforUsuario } = usuarioRancio;
-
-    const { idGrupoVista } = useContext(UsuarioContext)
-    const { grupo } = inforUsuario.grupos.find( infoG => infoG.grupo._id === idGrupoVista )
+    
     //console.log(grupo)
     return (
         <div className="cabecera_div_mensajes">
@@ -25,7 +18,7 @@ export default function Cabecera_grupo(){
 
             {/* DIV INFO GRUPO*/}
             <div className="">
-                <p className="m-0 ms-3 nombre_grupo">{grupo.nombre}</p>
+                <p className="m-0 ms-3 nombre_grupo">{Grupo.nombre}</p>
                 <p className="ms-3 mensaje_en_div_grupo">4 miembros</p>
                 
             </div>

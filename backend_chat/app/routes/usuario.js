@@ -16,4 +16,5 @@ routerUsuario.post('/setSocket',ingresarSocket)
 routerUsuario.post('/verInvitaciones', verInvitaciones)
 routerUsuario.post('/aceptarInvitacion', aceptarInvitacion)
 
+
 export default routerUsuario

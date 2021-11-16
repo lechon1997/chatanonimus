@@ -2,7 +2,6 @@ import {useContext } from 'react';
 import { io } from "socket.io-client";
 export default function Crear_comentario({id, id_g, socket}) {
   
-  console.log("xddd")
     const dataxd = async event => {
         event.preventDefault()
         const url = process.env.URL_BACKEND + '/grupo/nuevoComentario'
@@ -20,13 +19,17 @@ export default function Crear_comentario({id, id_g, socket}) {
           },
           method: 'POST'
         })
-
+        
         const { msg, data } = await res.json()
-		console.log(msg)
+		    console.log(msg)
     
-		
+	
 		if(msg === 'success') {
-			
+      event.target.asunto.value = ''
+      event.target.mensaje.value = ''
+      window.alert('Comentario creado correctamente')
+
+			/*
 			socket.emit("msg_frontend_to_backend", {
 				usuario_id: id,
 				grupo_id: id_g,
@@ -35,8 +38,9 @@ export default function Crear_comentario({id, id_g, socket}) {
 				anonimo: true,
 				usuarios: data
 			})
+      */ 
 		}
-
+	/*
     socket.on("recibir_msg", (respuesta) =>{
         console.log("respuesta servidor: ", respuesta)
     })
@@ -54,7 +58,7 @@ export default function Crear_comentario({id, id_g, socket}) {
           
         
         
-        
+     */   
     }
 
       return (

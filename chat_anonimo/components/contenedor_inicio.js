@@ -10,6 +10,7 @@ import Formulario_ver_solicitud from './formulario_ver_invitaciones'
 export default function contenedor_inicio() {
 	const [usuarioRancio] = useContext(Usuario_Context)
 	const { inforUsuario } = usuarioRancio;
+	console.log(inforUsuario)
 	const { grupos, grupovista} = useContext(UsuarioContext)
 
 	const [vistaCasera, setVistaCasera] = useState('')
@@ -86,7 +87,7 @@ export default function contenedor_inicio() {
 							/*
 							 console.log(inforUsuario.grupos)
 								*/
-																			
+								
 						inforUsuario.grupos.map( infoGrupo => (
 								
 								<Grupo_item
@@ -95,6 +96,7 @@ export default function contenedor_inicio() {
 								nombreGrupo={infoGrupo.grupo.nombre}
 								descGrupo={infoGrupo.grupo.descripcion}
 								setVistaC={setVistaCasera}
+								mensajesNuevos= {infoGrupo.comentariosNuevos.length}
 								
 								/>
 

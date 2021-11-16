@@ -8,9 +8,26 @@ import { Invitacion } from '../models/invitacion.js';
 async function getComentariosNuevos(idUsuario, idGrupo){
 
     const comentarios_nuevos = Comentario.find({"grupo_id": idGrupo, "usuarios_visto": {'$nin': [idUsuario]}})
-
     return comentarios_nuevos
 
+}
+
+async function getComentariosLeidos(idUsuario, idGrupo){
+
+    const comentarios_leidos = Comentario.find({"grupo_id": idGrupo, "usuarios_visto": {'$in': [idUsuario]}})
+    return comentarios_leidos
+
+}
+
+export async function mensajeVisto( req, res){
+    const { idmensaje, idusuario } = req.body
+    const comentario = await Comentario.findById(idmensaje)
+    
+    if(comentario.usuarios_visto.indexOf(idusuario) == -1){
+        await Comentario.findOneAndUpdate({'_id': idmensaje}, {'$push': {'usuarios_visto': idusuario}})
+        
+    }
+        
 }
 
 export async function getGrupos(req, res){
@@ -25,8 +42,9 @@ export async function getGrupos(req, res){
         //Si el usuario creó al grupo lo agrego
         if(usuario_creador == id_usu){
             const comxd = await getComentariosNuevos(id_usu, grupo.grupo_id)
-            console.log(comxd)
-            datos_grupos.push({grupo:res, comentariosNuevos: comxd})
+            const comxd2 = await getComentariosLeidos(id_usu, grupo.grupo_id)
+            //console.log(comxd)
+            datos_grupos.push({grupo:res, comentariosNuevos: comxd, comentariosLeidos: comxd2})
         }    
     }
             
@@ -38,14 +56,15 @@ export async function getGrupos(req, res){
                 if(invitacion.aceptado == true){
                     const grupoInvi = await Grupo.findOne({usuario_id: invitacion.id_usuario_solicitante})
                     const comxd = await getComentariosNuevos(id_usu, grupoInvi._id)
-                    console.log(comxd)
-                    datos_grupos.push(grupoInvi)
+                    const comxd2 = await getComentariosLeidos(id_usu, grupoInvi._id)
+                    //console.log(comxd)
+                    datos_grupos.push({grupo:grupoInvi, comentariosNuevos: comxd, comentariosLeidos: comxd2})
                 }
             }
         }
     }
 
-    console.log(datos_grupos)
+    //console.log(datos_grupos)
     //console.log(datos_grupos)
     return res.json({grupos: datos_grupos})
 
