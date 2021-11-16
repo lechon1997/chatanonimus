@@ -14,7 +14,7 @@ export default function contenedor_inicio() {
 	const { grupos, grupovista} = useContext(UsuarioContext)
 
 	const [vistaCasera, setVistaCasera] = useState('')
-
+	/*
 	const socket_frontend = io('http://localhost:4000', { transports : ['websocket'] })
 
 	socket_frontend.on("connection",{});
@@ -27,7 +27,7 @@ export default function contenedor_inicio() {
 	socket_frontend.on("msg_recibido",(data) => {
 		console.log("Información socket:", data)
 	})
-
+	*/
 	
 	const [formularioGrupo, setFormularioGrupo] = useState(false)
 	const [formularioSolicitud, setFormularioSolicitud] = useState(false)
@@ -96,14 +96,14 @@ export default function contenedor_inicio() {
 							/*
 							 console.log(inforUsuario.grupos)
 								*/
-													
-						inforUsuario.grupos.map( grupo => (
+																			
+						inforUsuario.grupos.map( infoGrupo => (
 								
 								<Grupo_item
-								key={grupo._id}
-								id={grupo._id}
-								nombreGrupo={grupo.nombre}
-								descGrupo={grupo.descripcion}
+								key={infoGrupo.grupo._id}
+								id={infoGrupo.grupo._id}
+								nombreGrupo={infoGrupo.grupo.nombre}
+								descGrupo={infoGrupo.grupo.descripcion}
 								setVistaC={setVistaCasera}
 								
 								/>

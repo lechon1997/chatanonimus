@@ -6,6 +6,8 @@ const initialUsuario = {
     inforUsuario : { 
         user: {},
         grupos: [],
+        comentariosNuevos: [],
+        comentariosLeidos: [],
         primeraVez: true
     }
     

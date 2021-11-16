@@ -4,6 +4,15 @@ import { Roles } from '../models/rol.js';
 import { Usuario } from '../models/usuario.js'; 
 import { Invitacion } from '../models/invitacion.js'; 
 
+
+async function getComentariosNuevos(idUsuario, idGrupo){
+
+    const comentarios_nuevos = Comentario.find({"grupo_id": idGrupo, "usuarios_visto": {'$nin': [idUsuario]}})
+
+    return comentarios_nuevos
+
+}
+
 export async function getGrupos(req, res){
     const { id_usu } = req.body
     const grupos = await Roles.find({"usuario_id":id_usu })
@@ -15,7 +24,9 @@ export async function getGrupos(req, res){
 
         //Si el usuario creó al grupo lo agrego
         if(usuario_creador == id_usu){
-            datos_grupos.push(res)
+            const comxd = await getComentariosNuevos(id_usu, grupo.grupo_id)
+            console.log(comxd)
+            datos_grupos.push({grupo:res, comentariosNuevos: comxd})
         }    
     }
             
@@ -26,6 +37,8 @@ export async function getGrupos(req, res){
             if(id_usu == invitacion.id_usuario_solicitado){
                 if(invitacion.aceptado == true){
                     const grupoInvi = await Grupo.findOne({usuario_id: invitacion.id_usuario_solicitante})
+                    const comxd = await getComentariosNuevos(id_usu, grupoInvi._id)
+                    console.log(comxd)
                     datos_grupos.push(grupoInvi)
                 }
             }
@@ -153,8 +166,8 @@ export async function eliminarGrupo(req, res){
 export async function nuevo_comentario(req, res){
     try{
         const { usuario_id, grupo_id } = req.body
-        //const comentario = new Comentario(req.body);
-        //await comentario.save();
+        const comentario = new Comentario(req.body);
+        await comentario.save();
 
         const usuarios_del_grupo = await Roles.find({ grupo_id })
         //console.log(usuarios_del_grupo)

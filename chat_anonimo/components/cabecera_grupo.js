@@ -9,8 +9,8 @@ export default function Cabecera_grupo(){
 	const { inforUsuario } = usuarioRancio;
 
     const { idGrupoVista } = useContext(UsuarioContext)
-    const grupo = inforUsuario.grupos.find( grupo => grupo._id === idGrupoVista )
-    
+    const { grupo } = inforUsuario.grupos.find( infoG => infoG.grupo._id === idGrupoVista )
+    //console.log(grupo)
     return (
         <div className="cabecera_div_mensajes">
 					

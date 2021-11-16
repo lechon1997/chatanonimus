@@ -13,13 +13,8 @@
     
 }
 
-.panel_actions_grupo div {
-    width:100px;
-    margin-left: 18px;;
-}
-
 .panel_actions_grupo div a { 
-    margin-left: 6px;
+    margin-left: 4px;
 }
 .panel_actions_grupo div:hover{
     color:#E91E63;
@@ -30,6 +25,7 @@
     display: flex;
     height:50px;
     max-height: 50px;
+    justify-content:space-around;
 }
 
 .panel_mensajes{
