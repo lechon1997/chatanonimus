@@ -1,14 +1,20 @@
 import React,{ useState, useEffect, useContext } from 'react'
-export default function ver_miembros(id_g){
+import jwt_decode from "jwt-decode";
+export default function ver_perfil(id_usu){
 
-    const [grupoinfo, setgrupoinfo] = useState([]);
+    const [usuarioinfo, setusuarioinfo] = useState([]);
+    const [img, setimg] = useState([]);
+    const [entra, setentra] = useState(false);
 
     useEffect( async () =>{ 
         //event.preventDefault()
-        const url = process.env.URL_BACKEND + '/grupo/getGrupo'
+        const token = localStorage.getItem('token')
+        const {usuario} = jwt_decode(token);
+
+        const url = process.env.URL_BACKEND + '/usuario/'
         const res = await fetch(url, {
           body: JSON.stringify({
-            grupo_id: id_g
+            id_usu: usuario.id
           }),
           headers: {
             'Content-Type': 'application/json; charset=utf-8'
@@ -17,18 +23,41 @@ export default function ver_miembros(id_g){
         })
 
         const json =  await res.json()
-        setgrupoinfo(json.info_grupo)
-        //console.log(json.info_grupo) 
-    })
+        setusuarioinfo(json)
 
-    return (
-        <div style={{ color: 'white' }} >
-            <h2>{grupoinfo.createdAt}</h2>
-            <h1>{grupoinfo.nombre}</h1>
-            <h3>{grupoinfo.descripcion}</h3>
-            <p>Miembros</p>
+        let fecha = json.usuario.createdAt.split("T");
+        json.usuario.createdAt = fecha[0]
+
+        let pathimg = process.env.URL_BACKEND + '/storage/imagenesUsuarios/' + json.usuario.foto
+        setimg(pathimg)
+
+        console.log(json)
+        setentra(true)
+    },[])
+
+    if(entra){
+        return (
+        <div>
+            <div style={{ color: 'white' }} >
+                <div style={{ background: 'darkslategrey', padding: '15px' }} id="infousuario">
+                    <img src={img} alt="foto de perfil" width="500" height="600"/>
+                    <h1>{usuarioinfo.usuario.nickname}</h1>
+                    <p>Nombre: {usuarioinfo.usuario.nombre}</p>
+                    <p>Apellido: {usuarioinfo.usuario.apellido}</p>
+                    <p>Celular: {usuarioinfo.usuario.celular}</p>
+                    <p>Cuenta creada el {usuarioinfo.usuario.createdAt}</p>
+                </div>
+            </div>
+            <br />
         </div>
+        )
+    }else{
+        return (
+        <div>
         
-    )
+        </div>
+        )
+    }
+    
 
 }

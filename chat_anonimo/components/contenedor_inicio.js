@@ -5,6 +5,7 @@ import { io } from "socket.io-client";
 import Formulario_crear_grupo from './formulario_nuevo_grupo'
 import { Usuario_Context } from '../Usuario/usuarioProvider'
 import Formulario_ver_solicitud from './formulario_ver_invitaciones'
+import Formulario_ver_perfil from './ver_perfil'
 
 
 export default function contenedor_inicio() {
@@ -30,6 +31,7 @@ export default function contenedor_inicio() {
 	
 	const [formularioGrupo, setFormularioGrupo] = useState(false)
 	const [formularioSolicitud, setFormularioSolicitud] = useState(false)
+	const [formularioPerfil, setFormularioPerfil] = useState(false)
 	return (
 		
 		<div className="contenedor_inicio">
@@ -45,6 +47,11 @@ export default function contenedor_inicio() {
 				<div className="panel_grupos">
 					{/* PANEL ACTIONS GRUPOS*/}
 					<div className="panel_actions_grupo">
+					<div>
+
+						<a onClick={ () => { setFormularioPerfil(formularioPerfil => !formularioPerfil)}}>Ver perfil</a>
+
+					</div>
 						<div>
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-people-fill" viewBox="0 0 16 16">
 								<path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
@@ -70,14 +77,17 @@ export default function contenedor_inicio() {
 						formularioSolicitud === true ? <Formulario_ver_solicitud formulario={formularioSolicitud} setFormulario={setFormularioSolicitud}/> : '' 
 
 					}
+
+					{/* FORMULARIO PERFIL */}
+					{
+						formularioPerfil === true ? <Formulario_ver_perfil formulario={formularioPerfil} setFormulario={setFormularioPerfil}/> : '' 
+
+					}
+					
 					<div>
 
 					</div>
-					<div>
-
-						<a onClick={ () => { setFormularioGrupo(formularioGrupo => !formularioGrupo)}}>Ver perfil</a>
-
-					</div>
+					
 					{/* CONTENEDOR DE LISTA GRUPOS */}
 					<div className="div_grupos">
 						{/* Grupo 1 a manopla*/}
@@ -107,6 +117,8 @@ export default function contenedor_inicio() {
 				
 
 				{/* CONTENEDOR DE GRUPO */}
+				
+				
 				{ vistaCasera }
 			</div>
 
