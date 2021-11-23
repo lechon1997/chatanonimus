@@ -1,12 +1,13 @@
-import React,{useContext } from 'react'
+import React, {useContext } from 'react'
+import { UsuarioContext } from '../context/usuarioContext'
 
 export default function Grupo_item({idInvitacion, nombreGrupo, nicknameUsuario,nombreUsuario, apellidoUsuario}){
-    const aceptarInvitacion = async (event) => {
-        
+    const {grupos, setGrupos} = useContext(UsuarioContext) 
+    const aceptarInvitacion = async (event) => {      
         event.preventDefault()
 
         const url = process.env.URL_BACKEND + "/usuario/aceptarInvitacion"
-    
+        console.log(event.target.value)
         const res = await fetch(url, {
             body: JSON.stringify({
                 id_invitacion: event.target.value,
@@ -20,9 +21,12 @@ export default function Grupo_item({idInvitacion, nombreGrupo, nicknameUsuario,n
         
         var element = document.getElementById(event.target.value);
         element.parentNode.removeChild(element);
+        
+        console.log(res)
+              
+        setGrupos([...grupos, res])
+        setFormulario(formulario => !formulario)
 
-        const result = await res.json()
-        console.log(result)
       }
 
       const rechazarInvitacion = async (event) => {
@@ -46,6 +50,7 @@ export default function Grupo_item({idInvitacion, nombreGrupo, nicknameUsuario,n
         element.parentNode.removeChild(element);
     
         const result = await res.json()
+
         console.log(result)
       }
 

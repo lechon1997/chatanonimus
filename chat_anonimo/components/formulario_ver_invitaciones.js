@@ -1,19 +1,21 @@
 import React, { useState, useEffect, useContext } from 'react'
 import Invitacion_item from './invitacion_item'
 import { Usuario_Context } from '../Usuario/usuarioProvider'
+import jwt_decode from "jwt-decode";
 
 export default function Formulario_nuevo_grupo({formulario, setFormulario}){
     const [solicitudesInfo, setSolicitudesInfo] = useState([]);
     const [usuarioRancio] = useContext(Usuario_Context)
 	  const { inforUsuario } = usuarioRancio; 
     
-
     useEffect( async () =>{ 
         //event.preventDefault()
         const url = process.env.URL_BACKEND + '/usuario/verInvitaciones'
+        const token = localStorage.getItem('token')
+        const {usuario} = jwt_decode(token);
         const res = await fetch(url, {
           body: JSON.stringify({
-            id_usuario: inforUsuario.usuario._id
+            id_usuario: usuario.id
           }),
           headers: {
             'Content-Type': 'application/json; charset=utf-8'

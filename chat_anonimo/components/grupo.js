@@ -9,8 +9,8 @@ export default function Grupo({id}){
     const [usuarioRancio] = useContext(Usuario_Context)
 	const { inforUsuario } = usuarioRancio;
 
-    const { idGrupoVista } = useContext(UsuarioContext)
-    const { grupo, comentariosNuevos, comentariosLeidos } = inforUsuario.grupos.find( infoG => infoG.grupo._id === idGrupoVista )
+    const { idGrupoVista, grupos } = useContext(UsuarioContext)
+    const { grupo, comentariosNuevos, comentariosLeidos } = grupos.find( infoG => infoG.grupo._id === idGrupoVista )
     return (
         <div className="div_mensajes">
             <Cabecera_grupo 

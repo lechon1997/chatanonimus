@@ -43,6 +43,8 @@ export default function Ranciada2(){
 		  	})
 			  
 		const res_grupos_js = await res_grupos_nojs.json()
+		//const {grupo} = res_grupos_js.grupos
+		console.log(res_grupos_js.grupos)
 		setGrupos(res_grupos_js.grupos) 
         
         var info_usuario = {usuario: res_usuario_js.usuario, grupos: res_grupos_js.grupos  }

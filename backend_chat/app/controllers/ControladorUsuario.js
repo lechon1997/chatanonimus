@@ -41,12 +41,12 @@ export async function crearUsuario(req, res){
 export async function verInvitaciones(req, res){  
     const retorno = []
     try{
-        const { id_usuario } = req.body;  
+        const { id_usuario } = req.body; 
         let usuario = await Usuario.findById({'_id': id_usuario})
         if(usuario){
             //Ahora hay que ver las invitaciones que tiene el usuario loggeado xd
             //Entonces voy a Invitaciones mmm
-            let invitaciones = await Invitacion.find({ id_usuario_solicitado: id_usuario})
+            let invitaciones = await Invitacion.find({ id_usuario_solicitado: usuario._id})
             if(!invitaciones){
                 console.log("no hay invitaciones xd")
                 return res.json({'msg': "No tenés invitaciones pa"})
@@ -85,15 +85,32 @@ export async function verInvitaciones(req, res){
 }
 
 export async function aceptarInvitacion(req, res){
-    
+        
         const {id_invitacion, estado} = req.body          
+        console.log(id_invitacion)
         if(estado){
             //En caso de que el tipo acepte, tengo que cambiar el estado de la invi.           
             Invitacion.findByIdAndUpdate(id_invitacion, {'aceptado': true}, (error, data) => {
                 if(error){
-                    return res.json(error)
+                    return res.json({error})
                 }else{
-                    return res.json(data)
+                    //Si no hay error
+                    const invitacion = Invitacion.findById({'_id': id_invitacion})
+
+                    const id_rol = invitacion.id_rol
+                    const rol = Roles.findById({'_id': id_rol})
+
+                    const {usuario_id} = rol
+                    const id_grupo = rol.grupo_id
+
+                    const grupo = Grupo.findById({'_id': id_grupo})
+                    const comentariosNuevos = getComentariosNuevos(usuario_id, id_grupo)
+                    const comentariosLeidos = getComentariosLeidos(usuario_id, id_grupo)
+
+                    return res.json({
+                        data: "Se ha creado el grupo correctamente",
+                        info_grupo: {grupo: grupo, comentariosNuevos: comentariosNuevos, comentariosLeidos: comentariosLeidos}
+                    })
                 }
             })                         
         }else{
@@ -103,7 +120,7 @@ export async function aceptarInvitacion(req, res){
 
             Invitacion.findByIdAndRemove(id_invitacion, function (err, docs) {
                 if (err){
-                    console.log(err)
+                    return res.json({error})
                 }
                 else{
                     console.log("Removed invitacion : ", docs);
@@ -112,13 +129,17 @@ export async function aceptarInvitacion(req, res){
 
             Roles.findByIdAndRemove(id_rol, function (err, docs) {
                 if (err){
-                    console.log(err)
+                    return res.json({error})
                 }
                 else{
                     console.log("Removed rol : ", docs);
                 }
             });
-            return res.json({'msg': 'Se rechazó correctamente'})
+
+            return res.json({
+                msg: "Se rechazó correctamente"
+            })
+
         }       
   
 }
@@ -231,4 +252,18 @@ export function insertData(req, res){
         }
         
     })
+}
+
+async function getComentariosNuevos(idUsuario, idGrupo){
+
+    const comentarios_nuevos = Comentario.find({"grupo_id": idGrupo, "usuarios_visto": {'$nin': [idUsuario]}})
+    return comentarios_nuevos
+
+}
+
+async function getComentariosLeidos(idUsuario, idGrupo){
+
+    const comentarios_leidos = Comentario.find({"grupo_id": idGrupo, "usuarios_visto": {'$in': [idUsuario]}})
+    return comentarios_leidos
+
 }

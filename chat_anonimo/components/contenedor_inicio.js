@@ -99,12 +99,12 @@ export default function contenedor_inicio() {
 													
 						grupos.map( grupo => (							
 								<Grupo_item
-								key={grupo.grupo._id}
-								id={grupo.grupo._id}
-								nombreGrupo={grupo.grupo.nombre}
-								descGrupo={grupo.grupo.descripcion}
+								key={grupo?.grupo._id}
+								id={grupo?.grupo._id}
+								nombreGrupo={grupo?.grupo.nombre}
+								descGrupo={grupo?.grupo.descripcion}
 								setVistaC={setVistaCasera}
-								mensajesNuevos= {grupo.comentariosNuevos.length}
+								mensajesNuevos= {grupo?.comentariosNuevos.length}
 								
 								/>
 

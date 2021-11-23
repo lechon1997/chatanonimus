@@ -129,9 +129,15 @@ export async function crearGrupo(req, res){
 
         const rol = new Roles({usuario_id: id_usuario, grupo_id: grupo._id, nombre:'Super administrador', admin:false,superAdmin:true})
         await rol.save();
+
+        const comentariosNuevos = []
+        const comentariosLeidos = []
+
+        //datos_grupos.push({grupo:grupoInvi, comentariosNuevos: comxd, comentariosLeidos: comxd2})
+
         res.send({
             data: "Se ha creado el grupo correctamente",
-            grupo
+            info_grupo: {grupo:grupo, comentariosNuevos: comentariosNuevos, comentariosLeidos: comentariosLeidos}
         })
 
     }catch(error){

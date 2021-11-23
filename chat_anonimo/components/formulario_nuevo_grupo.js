@@ -4,7 +4,7 @@ import jwt_decode from "jwt-decode";
 
 export default function Formulario_nuevo_grupo({formulario, setFormulario}){
     
-    const { agregarGrupo, grupos } = useContext(UsuarioContext)
+    const { setGrupos, grupos } = useContext(UsuarioContext)
     const [errorAltaGrupo,seterrorAltaGrupo] = useState('')
     
 
@@ -36,7 +36,7 @@ export default function Formulario_nuevo_grupo({formulario, setFormulario}){
 		switch(result.data){
             case 'Se ha creado el grupo correctamente':
                 
-                agregarGrupo([...grupos, result.grupo])
+                setGrupos([...grupos, result.info_grupo])
                 setFormulario(formulario => !formulario)
                 break
         }

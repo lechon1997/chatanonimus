@@ -24,9 +24,9 @@ const usuarioReducer = (state, action) => {
             }
             inforUsuario.co
         case types.agregarRespuesta:
-            state.inforUsuario.grupos.map(grupo => (
+            /*state.inforUsuario.grupos.map(grupo => (
                 grupo.comentariosLeidos.map(comentario => comentario._id === action.id_comentario? {...comentario, comentario.respuestas.push(action.respuesta_user)} : comentario)
-            ))
+            ))*/
             return {
                 ...state
 
