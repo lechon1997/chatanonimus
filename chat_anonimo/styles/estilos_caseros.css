@@ -13,13 +13,8 @@
     
 }
 
-.panel_actions_grupo div {
-    width:100px;
-    margin-left: 18px;;
-}
-
 .panel_actions_grupo div a { 
-    margin-left: 6px;
+    margin-left: 4px;
 }
 .panel_actions_grupo div:hover{
     color:#E91E63;
@@ -30,6 +25,7 @@
     display: flex;
     height:50px;
     max-height: 50px;
+    justify-content:space-around;
 }
 
 .panel_mensajes{
@@ -368,7 +364,8 @@
   }
 
 .mequierosuicidar{
-    width:75%;
+    width:85%;
+    background-color:#323232;
     
 }
 
@@ -400,6 +397,23 @@
     width: 60px;
     border-radius: 30px;
 }
+
+
+.color_user_comentario{
+    color:#FF3D00;
+}
+.div_imagen_grupo_ranciada{
+    display:flex;
+    justify-content:center;
+    flex-direction: column;
+    align-items: center;
+    margin-right:20px;
+    background-color:#757575;
+    width: 50px;
+    height:50px;
+    border-radius: 25px;
+}
+
 
 .cabecera_div_mensajes{
     flex:1;

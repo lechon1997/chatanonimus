@@ -13,7 +13,6 @@ export async function getUsuario(req, res){
 }
 
 export async function crearUsuario(req, res){
-    
     try{
         const { password, nickname } = req.body;
         let usuario = await Usuario.findOne({nickname})
@@ -21,9 +20,14 @@ export async function crearUsuario(req, res){
         if (usuario){
             res.status(200).send({'msg':'El usuario ya existe'})
         }else{
-            const usuario = new Usuario(req.body);
+            const { nickname, nombre, apellido , celular, password } = req.body;
+            const usuario = new Usuario({nickname: nickname, nombre: nombre, apellido: apellido, celular: celular, password: password});
             const salt = await bcrypt.genSalt(10)
             usuario.password = await bcrypt.hash(password, salt)
+            if(req.file){
+                const {filename} = req.file
+                usuario.setImgUrl(filename)
+            }
             await usuario.save();
             res.status(200).send({'msg':'success'})
         }

@@ -6,6 +6,7 @@ export default function Formulario_nuevo_grupo({formulario, setFormulario}){
     const [solicitudesInfo, setSolicitudesInfo] = useState([]);
     const [usuarioRancio] = useContext(Usuario_Context)
 	  const { inforUsuario } = usuarioRancio; 
+    
 
     useEffect( async () =>{ 
         //event.preventDefault()
