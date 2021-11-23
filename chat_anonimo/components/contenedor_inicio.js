@@ -11,7 +11,6 @@ import Formulario_ver_perfil from './ver_perfil'
 export default function contenedor_inicio() {
 	const [usuarioRancio] = useContext(Usuario_Context)
 	const { inforUsuario } = usuarioRancio;
-	console.log(inforUsuario)
 	const { grupos, grupovista} = useContext(UsuarioContext)
 
 	const [vistaCasera, setVistaCasera] = useState('')

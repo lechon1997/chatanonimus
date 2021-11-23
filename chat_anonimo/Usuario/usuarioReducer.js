@@ -1,5 +1,6 @@
 const types = {
-     setUser: 'nuevo - usuario'
+     setUser: 'nuevo - usuario',
+     agregarRespuesta: 'nueva - respuesta'
 }
 
 const initialUsuario = {
@@ -21,7 +22,15 @@ const usuarioReducer = (state, action) => {
                 ...state,
                 inforUsuario: action.inforUsuario
             }
-        
+            inforUsuario.co
+        case types.agregarRespuesta:
+            state.inforUsuario.grupos.map(grupo => (
+                grupo.comentariosLeidos.map(comentario => comentario._id === action.id_comentario? {...comentario, comentario.respuestas.push(action.respuesta_user)} : comentario)
+            ))
+            return {
+                ...state
+
+            }
         default:
             return state;
     }

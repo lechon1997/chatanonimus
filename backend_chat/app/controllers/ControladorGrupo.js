@@ -3,7 +3,7 @@ import { Comentario } from '../models/comentario.js';
 import { Roles } from '../models/rol.js';
 import { Usuario } from '../models/usuario.js'; 
 import { Invitacion } from '../models/invitacion.js'; 
-
+import { Respuestas } from '../models/respuesta.js';
 
 async function getComentariosNuevos(idUsuario, idGrupo){
 
@@ -25,10 +25,27 @@ export async function mensajeVisto( req, res){
     
     if(comentario.usuarios_visto.indexOf(idusuario) == -1){
         await Comentario.findOneAndUpdate({'_id': idmensaje}, {'$push': {'usuarios_visto': idusuario}})
+        Comentario.save()
         
     }
         
 }
+
+
+export async function guardarRespuesta(req, res){
+    const { nick_usuario, texto_respuesta, id_comentario } = req.body
+    try{
+        
+        const respuesta = new Respuestas({texto:texto_respuesta, nombreUsuario: nick_usuario})
+        await respuesta.save()
+        await Comentario.findOneAndUpdate({'_id':id_comentario}, {'$push': {'respuestas': respuesta}})
+        res.send({'msg':'success',
+                  'respuesta': respuesta})
+    }catch(err){
+        console.log(err)
+    }
+}
+
 
 export async function getGrupos(req, res){
     const { id_usu } = req.body
