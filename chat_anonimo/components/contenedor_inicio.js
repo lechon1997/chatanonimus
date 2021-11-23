@@ -83,7 +83,7 @@ export default function contenedor_inicio() {
 							 console.log(inforUsuario.grupos)
 								*/
 													
-						inforUsuario.grupos.map( grupo => (
+						grupos.map( grupo => (
 								
 								<Grupo_item
 								key={grupo._id}

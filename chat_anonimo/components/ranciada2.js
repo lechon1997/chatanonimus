@@ -7,7 +7,8 @@ import jwt_decode from "jwt-decode";
 
 export default function Ranciada2(){
     const [usuarioRancio, dispatch] = useContext(Usuario_Context)
-    const { inforUsuario } = usuarioRancio; 
+    const { inforUsuario } = usuarioRancio;
+	const {setGrupos} = useContext(UsuarioContext) 
     
     const url_info_usuario = process.env.URL_BACKEND + '/usuario/'
     const url_grupos_usuario = process.env.URL_BACKEND + '/grupo/'
@@ -41,7 +42,8 @@ export default function Ranciada2(){
 			method: 'POST'
 		  	})
 			  
-		const res_grupos_js = await res_grupos_nojs.json() 
+		const res_grupos_js = await res_grupos_nojs.json()
+		setGrupos(res_grupos_js.grupos) 
         
         var info_usuario = {usuario: res_usuario_js.usuario, grupos: res_grupos_js.grupos  }
 		dispatch({ 

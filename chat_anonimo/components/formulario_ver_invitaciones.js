@@ -5,7 +5,7 @@ import { Usuario_Context } from '../Usuario/usuarioProvider'
 export default function Formulario_nuevo_grupo({formulario, setFormulario}){
     const [solicitudesInfo, setSolicitudesInfo] = useState([]);
     const [usuarioRancio] = useContext(Usuario_Context)
-	const { inforUsuario } = usuarioRancio; 
+	  const { inforUsuario } = usuarioRancio; 
 
     useEffect( async () =>{ 
         //event.preventDefault()

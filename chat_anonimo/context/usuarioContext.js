@@ -6,6 +6,7 @@ export const UsuarioProvider = ({children}) => {
 
     const [idGrupoVista, setIdGrupovista] = useState('')
     const [vista_grupo, setVistaGrupo] = useState('')
+    const [grupos, setGrupos] = useState([])
     
  
     return (
@@ -15,6 +16,8 @@ export const UsuarioProvider = ({children}) => {
                 setVistaGrupo,
                 idGrupoVista,
                 setIdGrupovista,
+                grupos,
+                setGrupos
                 
             }}>
             { children }
