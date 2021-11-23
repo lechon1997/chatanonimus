@@ -238,10 +238,11 @@
     justify-content:center;
     flex-direction: column;
     align-items: center;
-
     background-color:#757575;
     width: 40px;
     height: 40px;
+    min-width: 40px;
+    min-height: 40px;
     border-radius: 20px;
 }
 
@@ -281,7 +282,6 @@
     width: 100%;
     height: 50px;
     max-height:50px;
-    background-color: #282828;
     position: sticky;
     
 }
@@ -290,8 +290,7 @@
     display:flex;
     height: 100%;
     padding-top:8px;
-    width:55%;
-    max-width: 700px;
+    width:90%;
 }
 
 
@@ -508,4 +507,110 @@ html, body{
 .div_invitaciones::-webkit-scrollbar-thumb{
     background-color: #616161;
     border-radius: 5px;    
+}
+
+
+.contenedor_mensaje{
+    width:800px;
+    height:auto;
+    padding-bottom: 30px;
+    margin:15px auto;
+    border-radius: 8px;
+    background-color: #3C3C3C;
+}
+
+.cabecera_mensaje{
+    height:60px;
+    width: 100%;
+    padding-top:6px;
+}
+
+.cuerpo_mensaje{
+    width: 100%;
+    height:auto;
+    margin-bottom: 30px;
+}
+
+.opciones_mensaje{
+    
+    height:40px;
+    width: 100%;
+}
+
+.contenedor_mensaje hr{
+    margin:4px 10px;
+    color:white;
+}
+
+.cabecera_mensaje div {
+    margin-top:2px;
+}
+
+.opciones_mensaje div{
+    width: auto;
+}
+
+.asdasdxDD{
+    font-size: 15px;
+}
+
+.asdasdxDDshrek{
+    font-size: 18px;
+}
+
+
+
+.asdxasdxddD{
+    color: #E0E0E0;
+    margin:15px 15px 15px  0px;
+    
+}
+
+.asdxasdxddD:hover{
+    color: #E91E63;
+    cursor: pointer;
+    
+}
+
+#comentarioxdd:hover{
+    color:#E91E63;
+    cursor: pointer;
+}
+
+.pijazo{
+    font-size: 12px;
+}
+
+.rojitoop{
+    color:#E0E0E0;
+}
+
+.violetitagod{
+    color:#80CBC4;
+}
+
+.sdfuibiufeiub{
+    color:#FFCC80;
+}
+
+.contenedor_respuesta_xd{
+    display:inline-flex;
+    width:auto;
+    min-width: 250px;
+    max-width: 750px;
+    height:auto;
+    min-height: 50px;
+    border-radius: 16px;
+    background-color: #616161;
+    margin:10px;
+    padding:6px;
+}
+
+.asfdiusofdsdfaasfd{
+    color:#E0E0E0;
+    font-size: 14px;
+}
+
+.displayxdd{
+    display:block !important;
 }

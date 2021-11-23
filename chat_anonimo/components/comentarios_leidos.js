@@ -1,5 +1,5 @@
 import Comentario_leido from "./comentario_leido"
-export default function Comentarios_leidos({comentariosLeidos}){
+export default function Comentarios_leidos({comentariosLeidos, cambiarVista, nicknameUsuario}){
 
     return (
         <div >
@@ -7,11 +7,10 @@ export default function Comentarios_leidos({comentariosLeidos}){
                 {
                     comentariosLeidos.map(comentarioN => (
                         <Comentario_leido 
-                            key= {comentarioN._id}
-                            id = {comentarioN._id}
-                            asunto= {comentarioN.asunto }
-                            fecha= { comentarioN.createdAt.substring(0,10) }
-                            mensaje = { comentarioN.mensaje }
+                            key={comentarioN._id}
+                            comentario={comentarioN}
+                            ranciada={cambiarVista}
+                            nickUsuario={nicknameUsuario}
                         />
                     ))
                 }

@@ -1,5 +1,5 @@
 
-export default function Ranciada({mensaje}){
+export default function Mensaje({mensaje}){
     const date = new Date;
     const minutes = date.getMinutes();
     const hour = date.getHours();
