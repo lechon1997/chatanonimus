@@ -2,6 +2,7 @@ import { Usuario } from '../models/usuario.js';
 import { Grupo } from '../models/grupo.js';
 import { Invitacion } from '../models/invitacion.js';
 import { Roles } from '../models/rol.js';
+import { Comentario } from '../models/comentario.js';
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken'
@@ -85,33 +86,17 @@ export async function verInvitaciones(req, res){
 }
 
 export async function aceptarInvitacion(req, res){
-        
-        const {id_invitacion, estado} = req.body          
-        console.log(id_invitacion)
+        const retorno = []
+        const {id_invitacion, estado} = req.body
+        var existe_error = null
+
         if(estado){
             //En caso de que el tipo acepte, tengo que cambiar el estado de la invi.           
-            Invitacion.findByIdAndUpdate(id_invitacion, {'aceptado': true}, (error, data) => {
+            Invitacion.findByIdAndUpdate(id_invitacion, {'aceptado': true}, (error, data) => {               
                 if(error){
+                    existe_error = error
                     return res.json({error})
-                }else{
-                    //Si no hay error
-                    const invitacion = Invitacion.findById({'_id': id_invitacion})
-
-                    const id_rol = invitacion.id_rol
-                    const rol = Roles.findById({'_id': id_rol})
-
-                    const {usuario_id} = rol
-                    const id_grupo = rol.grupo_id
-
-                    const grupo = Grupo.findById({'_id': id_grupo})
-                    const comentariosNuevos = getComentariosNuevos(usuario_id, id_grupo)
-                    const comentariosLeidos = getComentariosLeidos(usuario_id, id_grupo)
-
-                    return res.json({
-                        data: "Se ha creado el grupo correctamente",
-                        info_grupo: {grupo: grupo, comentariosNuevos: comentariosNuevos, comentariosLeidos: comentariosLeidos}
-                    })
-                }
+                }                         
             })                         
         }else{
             //En caso de que el tipo la rechace, borro la invi y el rol.
@@ -140,8 +125,28 @@ export async function aceptarInvitacion(req, res){
                 msg: "Se rechazó correctamente"
             })
 
-        }       
-  
+        }
+
+        if(existe_error == null){
+            //Si no hay error
+            const invitacion = await Invitacion.findById({'_id': id_invitacion})
+
+            const id_rol = invitacion.id_rol
+            const rol = await Roles.findById({'_id': id_rol})
+
+            const {usuario_id} = rol
+            const id_grupo = rol.grupo_id
+
+            const grupo = await Grupo.findById({'_id': id_grupo})
+            const comentariosNuevos = await getComentariosNuevos(usuario_id, id_grupo)
+            const comentariosLeidos = await getComentariosLeidos(usuario_id, id_grupo)
+         
+            return res.json({
+                data: "Se ha creado el grupo correctamente",
+                info_grupo: {grupo: grupo, comentariosNuevos: comentariosNuevos, comentariosLeidos: comentariosLeidos}
+            })
+        }
+
 }
 
 export async function actualizarUsuario(req, res){

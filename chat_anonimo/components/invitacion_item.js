@@ -1,7 +1,7 @@
 import React, {useContext } from 'react'
 import { UsuarioContext } from '../context/usuarioContext'
 
-export default function Grupo_item({idInvitacion, nombreGrupo, nicknameUsuario,nombreUsuario, apellidoUsuario}){
+export default function Grupo_item({idInvitacion, nombreGrupo, nicknameUsuario, nombreUsuario, apellidoUsuario}){
     const {grupos, setGrupos} = useContext(UsuarioContext) 
     const aceptarInvitacion = async (event) => {      
         event.preventDefault()
@@ -22,10 +22,9 @@ export default function Grupo_item({idInvitacion, nombreGrupo, nicknameUsuario,n
         var element = document.getElementById(event.target.value);
         element.parentNode.removeChild(element);
         
-        console.log(res)
-              
-        setGrupos([...grupos, res])
-        setFormulario(formulario => !formulario)
+        const result = await res.json()
+
+        setGrupos([...grupos, result.info_grupo])
 
       }
 
