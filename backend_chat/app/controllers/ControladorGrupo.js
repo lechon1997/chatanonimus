@@ -95,20 +95,75 @@ export async function getGrupo(req, res){
         const grupo = await Grupo.findById(grupo_id.id_g)
         let miembros = await Roles.find({grupo_id: grupo_id.id_g })
         
+
         let datos_miembros = []
+
         for (const miembro of miembros) {
             const usu = await Usuario.findById(miembro.usuario_id)
-
+console.log(usu)
             const datos = []
-            if(miembro.admin == true){
-                datos.push({nickname: usu.nickname, rol: miembro.nombre, admin: "Administrador"})
+
+            let invitado = await Invitacion.find({id_usuario_solicitado: miembro.usuario_id})
+
+            if(invitado.length > 0){
+
+                if(invitado[0].aceptado == true){
+
+                    if(miembro.admin == true){
+                        let pathimg
+                        if(usu.hasOwnProperty('foto')){
+                            console.log("asdf")
+                            pathimg = '/storage/imagenesUsuarios/' + usu.foto
+                        }else{
+                            console.log("xd")
+                            pathimg = '/storage/imagenesUsuarios/default.png'
+                        }
+                        datos.push({nickname: usu.nickname, rol: miembro.nombre, foto: pathimg,admin: "Administrador"})
+                    }else{
+                        let pathimg
+                        if(usu.hasOwnProperty('foto')){
+                            console.log("asdf")
+                            pathimg = '/storage/imagenesUsuarios/' + usu.foto
+                        }else{
+                            console.log("xd")
+                            pathimg = '/storage/imagenesUsuarios/default.png'
+                        }
+                        datos.push({nickname: usu.nickname, rol: miembro.nombre, foto: pathimg, admin: ""})
+                    }
+
+                    datos_miembros.push(datos)
+                    
+                }
             }else{
-                datos.push({nickname: usu.nickname, rol: miembro.nombre, admin: ""})
+
+                if(miembro.admin == true){
+                        let pathimg
+                        if(usu.hasOwnProperty('foto')){
+                            console.log("asdf")
+                            pathimg = '/storage/imagenesUsuarios/' + usu.foto
+                        }else{
+                            console.log("xd")
+                            pathimg = '/storage/imagenesUsuarios/default.png'
+                        }
+                        datos.push({nickname: usu.nickname, rol: miembro.nombre, foto: pathimg,admin: "Administrador"})
+                    }else{
+                        let pathimg
+                        if(usu.hasOwnProperty('foto')){
+                            console.log("asdf")
+                            pathimg = '/storage/imagenesUsuarios/' + usu.foto
+                        }else{
+                            console.log("xd")
+                            pathimg = '/storage/imagenesUsuarios/default.png'
+                        }
+                        datos.push({nickname: usu.nickname, rol: miembro.nombre, foto: pathimg, admin: ""})
+                    }
+
+                datos_miembros.push(datos)
+
             }
-            
-            datos_miembros.push(datos)
 
         }
+        
         return res.json({info_grupo: grupo, miembros: datos_miembros})
 
     }catch(err){

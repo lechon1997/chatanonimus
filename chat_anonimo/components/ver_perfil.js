@@ -28,7 +28,14 @@ export default function ver_perfil(id_usu){
         let fecha = json.usuario.createdAt.split("T");
         json.usuario.createdAt = fecha[0]
 
-        let pathimg = process.env.URL_BACKEND + '/storage/imagenesUsuarios/' + json.usuario.foto
+        let pathimg
+
+        if(json.usuario.hasOwnProperty('foto')){
+            pathimg = '/storage/imagenesUsuarios/' + json.usuario.foto
+        }else{
+            pathimg = '/storage/imagenesUsuarios/default.png'
+        }
+
         setimg(pathimg)
 
         console.log(json)
@@ -37,19 +44,22 @@ export default function ver_perfil(id_usu){
 
     if(entra){
         return (
-        <div>
-            <div style={{ color: 'white' }} >
-                <div style={{ background: 'darkslategrey', padding: '15px' }} id="infousuario">
-                    <img src={img} alt="foto de perfil" width="500" height="600"/>
-                    <h1>{usuarioinfo.usuario.nickname}</h1>
-                    <p>Nombre: {usuarioinfo.usuario.nombre}</p>
-                    <p>Apellido: {usuarioinfo.usuario.apellido}</p>
-                    <p>Celular: {usuarioinfo.usuario.celular}</p>
-                    <p>Cuenta creada el {usuarioinfo.usuario.createdAt}sapeexd</p>
-                </div>
-            </div>
-            <br />
+
+    <div className="card text-dark mb-2" style={{ width: '18rem' }} >
+        <div className="bg-dark p-4">
+            <img className="card-img-top border border-5 border-success rounded-circle" src={img} alt="foto de perfil" />
         </div>
+        <div className="card-body">
+          <h5 className="card-title">{usuarioinfo.usuario.nickname}</h5>
+          <p className="card-text">Nombre: {usuarioinfo.usuario.nombre}</p>
+          <p className="card-text">Apellido: {usuarioinfo.usuario.apellido}</p>
+          <p className="card-text">Celular: {usuarioinfo.usuario.celular}</p>
+          <div className="card-footer">
+            <small className="text-muted">Cuenta creada el {usuarioinfo.usuario.createdAt}</small>
+          </div>
+        </div>
+    </div>
+
         )
     }else{
         return (
