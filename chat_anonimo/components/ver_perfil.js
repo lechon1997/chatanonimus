@@ -45,7 +45,7 @@ export default function ver_perfil(id_usu){
                     <p>Nombre: {usuarioinfo.usuario.nombre}</p>
                     <p>Apellido: {usuarioinfo.usuario.apellido}</p>
                     <p>Celular: {usuarioinfo.usuario.celular}</p>
-                    <p>Cuenta creada el {usuarioinfo.usuario.createdAt}sapee</p>
+                    <p>Cuenta creada el {usuarioinfo.usuario.createdAt}sapeexd</p>
                 </div>
             </div>
             <br />
