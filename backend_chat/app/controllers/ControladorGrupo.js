@@ -100,7 +100,7 @@ export async function getGrupo(req, res){
 
         for (const miembro of miembros) {
             const usu = await Usuario.findById(miembro.usuario_id)
-console.log(usu)
+            //console.log(usu)
             const datos = []
 
             let invitado = await Invitacion.find({id_usuario_solicitado: miembro.usuario_id})
@@ -111,21 +111,17 @@ console.log(usu)
 
                     if(miembro.admin == true){
                         let pathimg
-                        if(usu.hasOwnProperty('foto')){
-                            console.log("asdf")
+                        if(usu.foto){
                             pathimg = '/storage/imagenesUsuarios/' + usu.foto
                         }else{
-                            console.log("xd")
                             pathimg = '/storage/imagenesUsuarios/default.png'
                         }
                         datos.push({nickname: usu.nickname, rol: miembro.nombre, foto: pathimg,admin: "Administrador"})
                     }else{
                         let pathimg
-                        if(usu.hasOwnProperty('foto')){
-                            console.log("asdf")
+                        if(usu.foto){
                             pathimg = '/storage/imagenesUsuarios/' + usu.foto
                         }else{
-                            console.log("xd")
                             pathimg = '/storage/imagenesUsuarios/default.png'
                         }
                         datos.push({nickname: usu.nickname, rol: miembro.nombre, foto: pathimg, admin: ""})
@@ -138,21 +134,17 @@ console.log(usu)
 
                 if(miembro.admin == true){
                         let pathimg
-                        if(usu.hasOwnProperty('foto')){
-                            console.log("asdf")
+                        if(usu.foto){
                             pathimg = '/storage/imagenesUsuarios/' + usu.foto
                         }else{
-                            console.log("xd")
                             pathimg = '/storage/imagenesUsuarios/default.png'
                         }
                         datos.push({nickname: usu.nickname, rol: miembro.nombre, foto: pathimg,admin: "Administrador"})
                     }else{
                         let pathimg
-                        if(usu.hasOwnProperty('foto')){
-                            console.log("asdf")
+                        if(usu.foto){
                             pathimg = '/storage/imagenesUsuarios/' + usu.foto
                         }else{
-                            console.log("xd")
                             pathimg = '/storage/imagenesUsuarios/default.png'
                         }
                         datos.push({nickname: usu.nickname, rol: miembro.nombre, foto: pathimg, admin: ""})

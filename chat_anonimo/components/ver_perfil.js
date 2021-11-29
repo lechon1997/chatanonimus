@@ -29,7 +29,7 @@ export default function ver_perfil(id_usu){
         json.usuario.createdAt = fecha[0]
 
         let pathimg
-
+        console.log(json.usuario)
         if(json.usuario.hasOwnProperty('foto')){
             pathimg = '/storage/imagenesUsuarios/' + json.usuario.foto
         }else{
