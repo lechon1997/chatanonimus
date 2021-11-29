@@ -1,28 +1,9 @@
-import { Usuario_Context } from '../Usuario/usuarioProvider'
-import { useContext } from 'react'
+import Ver_comentario2 from "./ver_comentario2"
 
-export default function Comentario_nuevo({asunto, fecha, mensaje, id}){
-    const [usuarioRancio] = useContext(Usuario_Context)
-	const { inforUsuario } = usuarioRancio;
-
-    const visto = async () => {
-        const url = process.env.URL_BACKEND + '/grupo/tevi'
-        const res = await fetch(url, {
-          body: JSON.stringify({
-              idmensaje: id,
-              idusuario: inforUsuario.usuario._id
-            
-          }),
-          headers: {
-            'Content-Type': 'application/json; charset=utf-8'
-          },
-          method: 'POST'
-        })
-    }
-
+export default function Comentario_nuevo({id_usuario, id_grupo, comentario, ranciada,nickUsuario}){
     return (
 
-    <a href="#" className="list-group-item list-group-item-action" onClick={ visto }>
+    <a href="#" className="list-group-item list-group-item-action" onClick={  ()=> {ranciada(<Ver_comentario2 id_usuario={id_usuario} id_grupo={id_grupo} comentario={comentario}  nickUsuario={nickUsuario}/>)} }>
             <div className="d-flex">
                 <div className="div_imagen_grupo_ranciada">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-people-fill" viewBox="0 0 16 16">
@@ -34,10 +15,10 @@ export default function Comentario_nuevo({asunto, fecha, mensaje, id}){
                 <div className=" w-100">
                 <p className="m-0 color_user_comentario">Anónimo</p>
                     <div className="d-flex w-100 justify-content-between">
-                        <h6 className="m-0">{ asunto }</h6>
-                        <small>{ fecha }</small>
+                        <h6 className="m-0">{comentario.asunto }</h6>
+                        <small>{ comentario.createdAt.substring(0,10) }</small>
                     </div>
-                    <p className="m-0">{ mensaje }</p>
+                    <p className="m-0">{ comentario.mensaje }</p>
                 </div>
             
             </div>

@@ -2,27 +2,13 @@ import { Usuario_Context } from '../Usuario/usuarioProvider'
 import Ver_comentario from './ver_comentario';
 import { useContext } from 'react'
 
-export default function Comentario_leido({comentario, ranciada,nickUsuario}){
+export default function Comentario_leido({id_usuario, id_grupo, comentario, ranciada,nickUsuario}){
     const [usuarioRancio] = useContext(Usuario_Context)
 	const { inforUsuario } = usuarioRancio;
 
-    const visto = async () => {
-        const url = process.env.URL_BACKEND + '/grupo/tevi'
-        const res = await fetch(url, {
-          body: JSON.stringify({
-              idmensaje: comentario._id,
-              idusuario: inforUsuario.usuario._id
-            
-          }),
-          headers: {
-            'Content-Type': 'application/json; charset=utf-8'
-          },
-          method: 'POST'
-        })
-    }
 
     return (
-        <a href="#" className="list-group-item list-group-item-action" onClick={ ()=> {ranciada(<Ver_comentario comentario={comentario}  nickUsuario={nickUsuario}/>)}}>
+        <a href="#" className="list-group-item list-group-item-action" onClick={ ()=> {ranciada(<Ver_comentario id_usuario={id_usuario} id_grupo={id_grupo} comentario={comentario}  nickUsuario={nickUsuario}/>)}}>
             <div className="d-flex">
                 <div className="div_imagen_grupo_ranciada">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-people-fill" viewBox="0 0 16 16">

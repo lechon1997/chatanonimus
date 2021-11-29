@@ -1,6 +1,6 @@
 import Comentario_nuevo from "./comentario_nuevo"
 
-export default function Comentarios_nuevos({ comentariosNuevos }){
+export default function Comentarios_nuevos({ id, id_g, comentariosNuevos, cambiarVista, nicknameUsuario }){
     //console.log(comentariosNuevos)
 
     return (
@@ -10,10 +10,11 @@ export default function Comentarios_nuevos({ comentariosNuevos }){
                     comentariosNuevos.map(comentarioN => (
                         <Comentario_nuevo 
                             key= {comentarioN._id}
-                            id = {comentarioN._id}
-                            asunto= {comentarioN.asunto }
-                            fecha= { comentarioN.createdAt.substring(0,10) }
-                            mensaje = { comentarioN.mensaje }
+                            comentario={comentarioN}
+                            ranciada={cambiarVista}
+                            nickUsuario={nicknameUsuario}
+                            id_usuario={id}
+                            id_grupo={id_g}
                         />
                     ))
                 }

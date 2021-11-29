@@ -7,14 +7,14 @@ import { Respuestas } from '../models/respuesta.js';
 
 async function getComentariosNuevos(idUsuario, idGrupo){
 
-    const comentarios_nuevos = Comentario.find({"grupo_id": idGrupo, "usuarios_visto": {'$nin': [idUsuario]}})
+    const comentarios_nuevos = Comentario.find({ '$and':[{ "grupo_id": idGrupo }, { "id_comentario_padre": null }, {"usuarios_visto": {'$nin': [idUsuario]}} ]})
     return comentarios_nuevos
 
 }
 
 async function getComentariosLeidos(idUsuario, idGrupo){
 
-    const comentarios_leidos = Comentario.find({"grupo_id": idGrupo, "usuarios_visto": {'$in': [idUsuario]}})
+    const comentarios_leidos = Comentario.find({ '$and':[ {"grupo_id": idGrupo},{"id_comentario_padre": null}, {"usuarios_visto": {'$in': [idUsuario]}} ]})
     return comentarios_leidos
 
 }
@@ -25,30 +25,32 @@ export async function mensajeVisto( req, res){
     
     if(comentario.usuarios_visto.indexOf(idusuario) == -1){
         await Comentario.findOneAndUpdate({'_id': idmensaje}, {'$push': {'usuarios_visto': idusuario}})
-        Comentario.save()
-        
     }
         
 }
 
 
 export async function guardarRespuesta(req, res){
-    const { nick_usuario, texto_respuesta, id_comentario } = req.body
+    const { nick_usuario, texto_respuesta, id_comentario, id_usuario, id_grupo} = req.body
     try{
         
-        const respuesta = new Respuestas({texto:texto_respuesta, nombreUsuario: nick_usuario})
+        const respuesta = new Comentario({usuario_id:id_usuario, grupo_id:id_grupo, mensaje:texto_respuesta, id_comentario_padre:id_comentario, nombreUsuario: nick_usuario, anonimo:false })
         await respuesta.save()
         await Comentario.findOneAndUpdate({'_id':id_comentario}, {'$push': {'respuestas': respuesta}})
+
+        //RANCIADA DE ULTIMO MOMENTO, SOLUCIÓN DE LA NASA
+        const u = await Usuario.findById(id_usuario)
+        const g = await ranciada_linda(id_usuario)
+        var info_usuario = {usuario: u, grupos: g}
         res.send({'msg':'success',
-                  'respuesta': respuesta})
+                  'respuesta': info_usuario,
+                  'comentario': respuesta})
     }catch(err){
         console.log(err)
     }
 }
 
-
-export async function getGrupos(req, res){
-    const { id_usu } = req.body
+async function ranciada_linda(id_usu){
     const grupos = await Roles.find({"usuario_id":id_usu })
     var datos_grupos = []
 
@@ -80,10 +82,13 @@ export async function getGrupos(req, res){
             }
         }
     }
+    return datos_grupos
+}
 
-    //console.log(datos_grupos)
-    //console.log(datos_grupos)
-    return res.json({grupos: datos_grupos})
+export async function getGrupos(req, res){
+    const { id_usu } = req.body
+    const respuesta = await ranciada_linda(id_usu)
+    return res.json({grupos: respuesta})
 
 }
 

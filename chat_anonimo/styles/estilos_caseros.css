@@ -592,7 +592,10 @@ html, body{
 .sdfuibiufeiub{
     color:#FFCC80;
 }
-
+.asdasdfasdfasxDDasd{
+    display:flex;
+    flex-direction: column;  
+}
 .contenedor_respuesta_xd{
     display:inline-flex;
     width:auto;

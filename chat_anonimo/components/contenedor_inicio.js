@@ -12,7 +12,7 @@ export default function contenedor_inicio() {
 	const [usuarioRancio] = useContext(Usuario_Context)
 	const { inforUsuario } = usuarioRancio;
 	const { grupos, grupovista} = useContext(UsuarioContext)
-	console.log(grupos)
+	//console.log(grupos)
 	const [vistaCasera, setVistaCasera] = useState('')
 	/*
 	const socket_frontend = io('http://localhost:4000', { transports : ['websocket'] })

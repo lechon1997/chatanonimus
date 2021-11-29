@@ -10,14 +10,23 @@ const ComentarioSchema = new mongoose.Schema({
         required: true
     },
     asunto:{
-        type: String,
-        required: true
+        type: String
     },
     mensaje:{
         type: String
     },
     anonimo: {
-        type: Boolean
+        type: Boolean,
+        default: true
+    },
+    id_comentario_padre:{
+        type: String,
+        default: null
+
+    },nombreUsuario:{
+        type: String,
+        default: null
+        
     },
     respuestas: [],
     usuarios_visto: []

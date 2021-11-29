@@ -1,8 +1,28 @@
 import Escribir_mensaje from "./escribir_mensaje"
-import {useState} from 'react'
-export default function Ver_comentario({id_usuario, id_grupo, comentario, nickUsuario}){
+import {useState, useEffect,useContext} from 'react'
+import { Usuario_Context } from '../Usuario/usuarioProvider'
+
+export default function Ver_comentario2({id_usuario, id_grupo, comentario, nickUsuario}){
     const [respuestas, setRespuesta] = useState(comentario.respuestas)
-    console.log(comentario,"pijazo")
+    const [usuarioRancio] = useContext(Usuario_Context)
+	const { inforUsuario } = usuarioRancio;
+
+    useEffect(async () => {
+        const url = process.env.URL_BACKEND + '/grupo/tevi'
+        const res = await fetch(url, {
+          body: JSON.stringify({
+              idmensaje: comentario._id,
+              idusuario: inforUsuario.usuario._id
+            
+          }),
+          headers: {
+            'Content-Type': 'application/json; charset=utf-8'
+          },
+          method: 'POST'
+        })
+        
+    },[])
+
     return (
         <div className="contenedor_mensaje">
             <div className="d-flex justify-content-between">
@@ -77,9 +97,7 @@ export default function Ver_comentario({id_usuario, id_grupo, comentario, nickUs
                         </div>
                     ) )
                 }
-
             </div>
-
         </div>
         
     )
