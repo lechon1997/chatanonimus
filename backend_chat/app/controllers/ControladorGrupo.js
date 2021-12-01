@@ -259,15 +259,21 @@ export async function eliminarGrupo(req, res){
 
 export async function nuevo_comentario(req, res){
     try{
-        const { usuario_id, grupo_id } = req.body
+        const { usuario_id, grupo_id,anonimo } = req.body
         const comentario = new Comentario(req.body);
+        console.log(typeof anonimo)
+        if (!anonimo){
+            const u = await Usuario.findById(usuario_id)
+            console.log(u.nickname)
+            comentario.nombreUsuario = u.nickname
+        }
         await comentario.save();
 
         const usuarios_del_grupo = await Roles.find({ grupo_id })
         //console.log(usuarios_del_grupo)
         return res.json({
             'msg':'success',
-            'data': usuarios_del_grupo
+            'data': comentario
         })
     }catch(err){
         console.log(err)
