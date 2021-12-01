@@ -3,7 +3,7 @@ import Comentarios_leidos from './comentarios_leidos'
 import Ver_grupo from './ver_grupo'
 import Agregar_miembros from './agregar_miembros'
 import Crear_comentario from './crear_comentario'
-import { useContext } from 'react'
+import { useContext,useState } from 'react'
 import { UsuarioContext } from '../context/usuarioContext'
 import { Usuario_Context } from '../Usuario/usuarioProvider'
 import { io } from "socket.io-client";    
@@ -11,6 +11,7 @@ import { io } from "socket.io-client";
 export default function Contenedor_grupo({ ComentariosNuevos, ComentariosLeidos }){
 	const { vista_grupo, setVistaGrupo } = useContext(UsuarioContext)
     const { idGrupoVista} = useContext(UsuarioContext)
+    const [mensajesNuevosXd, setMensajes] = useState(ComentariosNuevos)
     
     //const socket = io('http://localhost:4000', { transports : ['websocket'] })
     //socket.on("connection",{});
@@ -33,7 +34,7 @@ export default function Contenedor_grupo({ ComentariosNuevos, ComentariosLeidos 
 						</svg>
                            {/*  <a onClick={ () => { cambiarVista(Crear_comentario)}} className="link-light w-100" >Crear comentario</a> */}
                            
-						   <a onClick={ () => { setVistaGrupo(<Crear_comentario id= {inforUsuario.usuario._id} id_g={idGrupoVista} />)}} className="link-light w-100" >Crear comentario</a>
+						   <a onClick={ () => { setVistaGrupo(<Crear_comentario id={inforUsuario.usuario._id} id_g={idGrupoVista} vpi={setMensajes} vpi2={mensajesNuevosXd}/>)}} className="link-light w-100" >Crear comentario</a>
                           
                     </div>
 
@@ -49,7 +50,7 @@ export default function Contenedor_grupo({ ComentariosNuevos, ComentariosLeidos 
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" className="bi bi-envelope" viewBox="0 0 16 16">
                             <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z"/>
                         </svg>
-						<a onClick={ () => { setVistaGrupo(<Comentarios_nuevos id={inforUsuario.usuario._id} id_g={idGrupoVista}  comentariosNuevos={ComentariosNuevos} cambiarVista={setVistaGrupo} nicknameUsuario={inforUsuario.usuario.nickname} />)}} className="link-light w-100" >Comentarios nuevos</a>
+						<a onClick={ () => { setVistaGrupo(<Comentarios_nuevos id={inforUsuario.usuario._id} id_g={idGrupoVista}  comentariosNuevos={mensajesNuevosXd} cambiarVista={setVistaGrupo} nicknameUsuario={inforUsuario.usuario.nickname} />)}} className="link-light w-100" >Comentarios nuevos</a>
                     
                     </div>
                     
