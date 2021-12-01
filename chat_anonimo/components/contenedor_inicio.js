@@ -28,6 +28,11 @@ export default function contenedor_inicio() {
 		console.log("Información socket:", data)
 	})
 	*/
+    const cerrarsesion = async event => {
+		localStorage.clear()                
+	    const url = process.env.URL_FRONTEND
+	    window.location.href = url 
+	}
 	
 	const [formularioGrupo, setFormularioGrupo] = useState(false)
 	const [formularioSolicitud, setFormularioSolicitud] = useState(false)
@@ -47,9 +52,12 @@ export default function contenedor_inicio() {
 				<div className="panel_grupos">
 					{/* PANEL ACTIONS GRUPOS*/}
 					<div className="panel_actions_grupo">
+
+					<button type="button" onClick={cerrarsesion} className="btn-close btn-close-white" aria-label="Close"></button>
+
 					<div>
 
-						<a onClick={ () => { setFormularioPerfil(formularioPerfil => !formularioPerfil)}}>Ver perfil</a>
+						<a onClick={ () => { setFormularioPerfil(formularioPerfil => !formularioPerfil)}}>Ver Perfil </a>
 
 					</div>
 						<div>
@@ -83,6 +91,8 @@ export default function contenedor_inicio() {
 						formularioPerfil === true ? <Formulario_ver_perfil formulario={formularioPerfil} setFormulario={setFormularioPerfil}/> : '' 
 
 					}
+
+
 					
 					<div>
 

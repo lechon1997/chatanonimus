@@ -272,3 +272,7 @@ async function getComentariosLeidos(idUsuario, idGrupo){
     return comentarios_leidos
 
 }
+
+export async function cerrarsesion(req, res){
+    //jwtr.destroy(token)
+}

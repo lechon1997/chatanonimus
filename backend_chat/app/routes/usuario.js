@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getUsuario, crearUsuario, actualizarUsuario, autenticarUsuario,eliminarUsuario, informacionUsuario, ingresarSocket, verInvitaciones, aceptarInvitacion} from '../controllers/ControladorUsuario.js';
+import { cerrarsesion, getUsuario, crearUsuario, actualizarUsuario, autenticarUsuario,eliminarUsuario, informacionUsuario, ingresarSocket, verInvitaciones, aceptarInvitacion} from '../controllers/ControladorUsuario.js';
 import {upload} from "../../libs/storage_usuarios.js";
 const routerUsuario = Router()
 
@@ -12,6 +12,7 @@ routerUsuario.post('/',informacionUsuario)
 //routerUsuario.patch('/:id',actualizarUsuario)
 //routerUsuario.delete('/:id',eliminarUsuario)
 routerUsuario.post('/auth',autenticarUsuario)
+routerUsuario.post('/cs',cerrarsesion)
 routerUsuario.post('/setSocket',ingresarSocket)
 routerUsuario.post('/verInvitaciones', verInvitaciones)
 routerUsuario.post('/aceptarInvitacion', aceptarInvitacion)
