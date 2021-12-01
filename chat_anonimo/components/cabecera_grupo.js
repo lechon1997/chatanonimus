@@ -22,7 +22,7 @@ export default function Cabecera_grupo({ Grupo, ComentariosNuevos }){
 					
 			{/* DIV IMAGEN DEL GRUPO*/}
             <div className="imagen_grupo_en_cabecera_mensajes">
-                <img className="rounded-circle w-100" src={img} />
+                <img style={{ width: '250px' , height: '250px' }} className="rounded-circle w-100" src={img} />
             </div>
 
             {/* DIV INFO GRUPO*/}

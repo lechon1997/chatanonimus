@@ -99,7 +99,6 @@ export async function getGrupo(req, res){
 
         const grupo = await Grupo.findById(grupo_id.id_g)
         let miembros = await Roles.find({grupo_id: grupo_id.id_g })
-        
 
         let datos_miembros = []
 
@@ -162,6 +161,20 @@ export async function getGrupo(req, res){
         }
         
         return res.json({info_grupo: grupo, miembros: datos_miembros})
+
+    }catch(err){
+        return res.json({'msg':err});
+    }
+}
+
+export async function getfoto(req, res){
+    const { grupo_id } = req.body;
+
+    try{
+
+        const grupo = await Grupo.findById(grupo_id)
+    
+        return res.json({foto: grupo.foto})
 
     }catch(err){
         return res.json({'msg':err});

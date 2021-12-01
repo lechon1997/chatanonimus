@@ -18,6 +18,7 @@ export default function agregar_miembros({id, id_g}){
         })
 
         const { msg } = await res.json()
+        window.alert(msg)
         console.log(msg)    
     }
 
